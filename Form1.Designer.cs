@@ -66,7 +66,6 @@
             this.AvailableSnacks = new System.Windows.Forms.Button();
             this.AvailableDrinks = new System.Windows.Forms.Button();
             this.AvailableItems = new System.Windows.Forms.Button();
-            this.InventoryReport = new System.Windows.Forms.Button();
             this.ModifyInventory = new System.Windows.Forms.Button();
             this.ModifyDesc = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -79,9 +78,6 @@
             this.label12 = new System.Windows.Forms.Label();
             this.NameInput = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.InventoryTableChoice = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.OutOfStockGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UsersGridView)).BeginInit();
             this.listBoxOutOfStock = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
@@ -95,38 +91,16 @@
             this.OutOfStockButton.UseVisualStyleBackColor = true;
             this.OutOfStockButton.Click += new System.EventHandler(this.button1_Click);
             // 
-            // OutOfStockGridView
-            // 
-            this.OutOfStockGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.OutOfStockGridView.Location = new System.Drawing.Point(112, 465);
-            this.OutOfStockGridView.Margin = new System.Windows.Forms.Padding(4);
-            this.OutOfStockGridView.Name = "OutOfStockGridView";
-            this.OutOfStockGridView.RowHeadersWidth = 123;
-            this.OutOfStockGridView.Size = new System.Drawing.Size(808, 288);
-            this.OutOfStockGridView.TabIndex = 1;
-            this.OutOfStockGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // DisplayUserButton
-            // 
-            this.DisplayUserButton.Location = new System.Drawing.Point(969, 374);
-            this.DisplayUserButton.Margin = new System.Windows.Forms.Padding(4);
-            this.DisplayUserButton.Name = "DisplayUserButton";
-            this.DisplayUserButton.Size = new System.Drawing.Size(201, 37);
-            this.DisplayUserButton.TabIndex = 3;
-            this.DisplayUserButton.Text = "Display Users";
-            this.DisplayUserButton.UseVisualStyleBackColor = true;
-            this.DisplayUserButton.Click += new System.EventHandler(this.DisplayUserButton_Click);
-            // 
             // nicnameTextBox
             // 
-            this.nicnameTextBox.Location = new System.Drawing.Point(1113, 221);
+            this.nicnameTextBox.Location = new System.Drawing.Point(995, 134);
             this.nicnameTextBox.Name = "nicnameTextBox";
             this.nicnameTextBox.Size = new System.Drawing.Size(100, 20);
             this.nicnameTextBox.TabIndex = 4;
             // 
             // debitBox1
             // 
-            this.debitBox1.Location = new System.Drawing.Point(1256, 221);
+            this.debitBox1.Location = new System.Drawing.Point(1138, 134);
             this.debitBox1.Name = "debitBox1";
             this.debitBox1.Size = new System.Drawing.Size(100, 20);
             this.debitBox1.TabIndex = 5;
@@ -134,7 +108,7 @@
             // nicknameLabel
             // 
             this.nicknameLabel.AutoSize = true;
-            this.nicknameLabel.Location = new System.Drawing.Point(1110, 187);
+            this.nicknameLabel.Location = new System.Drawing.Point(992, 100);
             this.nicknameLabel.Name = "nicknameLabel";
             this.nicknameLabel.Size = new System.Drawing.Size(55, 13);
             this.nicknameLabel.TabIndex = 6;
@@ -143,7 +117,7 @@
             // debitLabel
             // 
             this.debitLabel.AutoSize = true;
-            this.debitLabel.Location = new System.Drawing.Point(1253, 187);
+            this.debitLabel.Location = new System.Drawing.Point(1135, 100);
             this.debitLabel.Name = "debitLabel";
             this.debitLabel.Size = new System.Drawing.Size(32, 13);
             this.debitLabel.TabIndex = 7;
@@ -152,7 +126,7 @@
             // newUserLabel
             // 
             this.newUserLabel.AutoSize = true;
-            this.newUserLabel.Location = new System.Drawing.Point(1110, 141);
+            this.newUserLabel.Location = new System.Drawing.Point(992, 54);
             this.newUserLabel.Name = "newUserLabel";
             this.newUserLabel.Size = new System.Drawing.Size(81, 13);
             this.newUserLabel.TabIndex = 8;
@@ -160,7 +134,7 @@
             // 
             // addButton
             // 
-            this.addButton.Location = new System.Drawing.Point(1119, 269);
+            this.addButton.Location = new System.Drawing.Point(1001, 182);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(75, 23);
             this.addButton.TabIndex = 9;
@@ -170,7 +144,7 @@
             // 
             // NukeAll
             // 
-            this.NukeAll.Location = new System.Drawing.Point(1125, 491);
+            this.NukeAll.Location = new System.Drawing.Point(770, 763);
             this.NukeAll.Margin = new System.Windows.Forms.Padding(1);
             this.NukeAll.Name = "NukeAll";
             this.NukeAll.Size = new System.Drawing.Size(114, 24);
@@ -267,9 +241,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.CausesValidation = false;
-            this.label1.Location = new System.Drawing.Point(1480, 395);
+            this.label1.Location = new System.Drawing.Point(718, 366);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 16);
+            this.label1.Size = new System.Drawing.Size(69, 13);
             this.label1.TabIndex = 21;
             this.label1.Text = "Add a Snack";
             // 
@@ -277,20 +251,19 @@
             // 
             this.label2.AutoSize = true;
             this.label2.CausesValidation = false;
-            this.label2.Location = new System.Drawing.Point(1480, 432);
+            this.label2.Location = new System.Drawing.Point(718, 403);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 16);
+            this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 23;
             this.label2.Text = "Name";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.CausesValidation = false;
-            this.label3.Location = new System.Drawing.Point(1604, 432);
+            this.label3.Location = new System.Drawing.Point(842, 403);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 16);
+            this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 24;
             this.label3.Text = "Price";
             // 
@@ -298,148 +271,135 @@
             // 
             this.label4.AutoSize = true;
             this.label4.CausesValidation = false;
-            this.label4.Location = new System.Drawing.Point(1686, 432);
+            this.label4.Location = new System.Drawing.Point(924, 403);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 16);
+            this.label4.Size = new System.Drawing.Size(60, 13);
             this.label4.TabIndex = 25;
             this.label4.Text = "Description";
             // 
             // snackName
             // 
             this.snackName.CausesValidation = false;
-            this.snackName.Location = new System.Drawing.Point(1483, 451);
+            this.snackName.Location = new System.Drawing.Point(721, 422);
             this.snackName.Name = "snackName";
-            this.snackName.Size = new System.Drawing.Size(100, 22);
+            this.snackName.Size = new System.Drawing.Size(100, 20);
             this.snackName.TabIndex = 27;
             // 
             // snackCost
             // 
             this.snackCost.CausesValidation = false;
-            this.snackCost.Location = new System.Drawing.Point(1589, 451);
+            this.snackCost.Location = new System.Drawing.Point(827, 422);
             this.snackCost.Name = "snackCost";
-            this.snackCost.Size = new System.Drawing.Size(67, 22);
+            this.snackCost.Size = new System.Drawing.Size(67, 20);
             this.snackCost.TabIndex = 28;
             // 
             // snackDescription
             // 
             this.snackDescription.CausesValidation = false;
-            this.snackDescription.Location = new System.Drawing.Point(1662, 451);
+            this.snackDescription.Location = new System.Drawing.Point(900, 422);
             this.snackDescription.Name = "snackDescription";
-            this.snackDescription.Size = new System.Drawing.Size(131, 22);
+            this.snackDescription.Size = new System.Drawing.Size(131, 20);
             this.snackDescription.TabIndex = 29;
             // 
             // drinkDescription
             // 
-            this.drinkDescription.Location = new System.Drawing.Point(1662, 574);
+            this.drinkDescription.Location = new System.Drawing.Point(900, 545);
             this.drinkDescription.Name = "drinkDescription";
-            this.drinkDescription.Size = new System.Drawing.Size(131, 22);
+            this.drinkDescription.Size = new System.Drawing.Size(131, 20);
             this.drinkDescription.TabIndex = 38;
-            this.drinkDescription.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // drinkCost
             // 
             this.drinkCost.CausesValidation = false;
-            this.drinkCost.Location = new System.Drawing.Point(1589, 574);
+            this.drinkCost.Location = new System.Drawing.Point(827, 545);
             this.drinkCost.Name = "drinkCost";
-            this.drinkCost.Size = new System.Drawing.Size(67, 22);
+            this.drinkCost.Size = new System.Drawing.Size(67, 20);
             this.drinkCost.TabIndex = 37;
-            this.drinkCost.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // drinkName
             // 
             this.drinkName.CausesValidation = false;
-            this.drinkName.Location = new System.Drawing.Point(1483, 574);
+            this.drinkName.Location = new System.Drawing.Point(721, 545);
             this.drinkName.Name = "drinkName";
-            this.drinkName.Size = new System.Drawing.Size(100, 22);
+            this.drinkName.Size = new System.Drawing.Size(100, 20);
             this.drinkName.TabIndex = 36;
-            this.drinkName.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.CausesValidation = false;
-            this.label6.Location = new System.Drawing.Point(1796, 557);
+            this.label6.Location = new System.Drawing.Point(1034, 528);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(106, 16);
+            this.label6.Size = new System.Drawing.Size(88, 13);
             this.label6.TabIndex = 35;
             this.label6.Text = "Caffinated? (T/F)";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.CausesValidation = false;
-            this.label7.Location = new System.Drawing.Point(1686, 555);
+            this.label7.Location = new System.Drawing.Point(924, 526);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(75, 16);
+            this.label7.Size = new System.Drawing.Size(60, 13);
             this.label7.TabIndex = 34;
             this.label7.Text = "Description";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.CausesValidation = false;
-            this.label8.Location = new System.Drawing.Point(1604, 555);
+            this.label8.Location = new System.Drawing.Point(842, 526);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(38, 16);
+            this.label8.Size = new System.Drawing.Size(31, 13);
             this.label8.TabIndex = 33;
             this.label8.Text = "Price";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.CausesValidation = false;
-            this.label9.Location = new System.Drawing.Point(1480, 555);
+            this.label9.Location = new System.Drawing.Point(718, 526);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(44, 16);
+            this.label9.Size = new System.Drawing.Size(35, 13);
             this.label9.TabIndex = 32;
             this.label9.Text = "Name";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.CausesValidation = false;
-            this.label10.Location = new System.Drawing.Point(1480, 518);
+            this.label10.Location = new System.Drawing.Point(718, 489);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(77, 16);
+            this.label10.Size = new System.Drawing.Size(63, 13);
             this.label10.TabIndex = 31;
             this.label10.Text = "Add a Drink";
-            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // snackAdd
             // 
-            this.snackAdd.Location = new System.Drawing.Point(1483, 480);
+            this.snackAdd.Location = new System.Drawing.Point(721, 451);
             this.snackAdd.Margin = new System.Windows.Forms.Padding(4);
             this.snackAdd.Name = "snackAdd";
             this.snackAdd.Size = new System.Drawing.Size(100, 28);
             this.snackAdd.TabIndex = 40;
             this.snackAdd.Text = "Add";
             this.snackAdd.UseVisualStyleBackColor = true;
-            this.snackAdd.Click += new System.EventHandler(this.snackAdd_Click);
             // 
             // DrinkAdd
             // 
-            this.DrinkAdd.Location = new System.Drawing.Point(1484, 603);
+            this.DrinkAdd.Location = new System.Drawing.Point(722, 574);
             this.DrinkAdd.Margin = new System.Windows.Forms.Padding(4);
             this.DrinkAdd.Name = "DrinkAdd";
             this.DrinkAdd.Size = new System.Drawing.Size(100, 28);
             this.DrinkAdd.TabIndex = 41;
             this.DrinkAdd.Text = "Add";
             this.DrinkAdd.UseVisualStyleBackColor = true;
-            this.DrinkAdd.Click += new System.EventHandler(this.DrinkAdd_Click);
             // 
             // isCaffinated
-            // listBoxOutOfStock
             // 
-            this.listBoxOutOfStock.FormattingEnabled = true;
-            this.listBoxOutOfStock.Location = new System.Drawing.Point(84, 330);
-            this.listBoxOutOfStock.Margin = new System.Windows.Forms.Padding(1);
-            this.listBoxOutOfStock.Name = "listBoxOutOfStock";
-            this.listBoxOutOfStock.Size = new System.Drawing.Size(609, 212);
-            this.listBoxOutOfStock.TabIndex = 17;
+            this.isCaffinated.Location = new System.Drawing.Point(12, 7);
+            this.isCaffinated.Name = "isCaffinated";
+            this.isCaffinated.Size = new System.Drawing.Size(100, 20);
+            this.isCaffinated.TabIndex = 60;
             // 
             // AvailableSnacks
             // 
@@ -449,7 +409,6 @@
             this.AvailableSnacks.TabIndex = 43;
             this.AvailableSnacks.Text = "View Available Snacks";
             this.AvailableSnacks.UseVisualStyleBackColor = true;
-            this.AvailableSnacks.Click += new System.EventHandler(this.AvailableSnacks_Click);
             // 
             // AvailableDrinks
             // 
@@ -459,7 +418,6 @@
             this.AvailableDrinks.TabIndex = 44;
             this.AvailableDrinks.Text = "View Available Drinks";
             this.AvailableDrinks.UseVisualStyleBackColor = true;
-            this.AvailableDrinks.Click += new System.EventHandler(this.AvailableDrinks_Click);
             // 
             // AvailableItems
             // 
@@ -469,22 +427,10 @@
             this.AvailableItems.TabIndex = 45;
             this.AvailableItems.Text = "View Available Items";
             this.AvailableItems.UseVisualStyleBackColor = true;
-            this.AvailableItems.Click += new System.EventHandler(this.AvailableItems_Click);
-            // 
-            // InventoryReport
-            // 
-            this.InventoryReport.Location = new System.Drawing.Point(112, 411);
-            this.InventoryReport.Margin = new System.Windows.Forms.Padding(4);
-            this.InventoryReport.Name = "InventoryReport";
-            this.InventoryReport.Size = new System.Drawing.Size(201, 37);
-            this.InventoryReport.TabIndex = 46;
-            this.InventoryReport.Text = "Inventory Report";
-            this.InventoryReport.UseVisualStyleBackColor = true;
-            this.InventoryReport.Click += new System.EventHandler(this.InventoryReport_Click);
             // 
             // ModifyInventory
             // 
-            this.ModifyInventory.Location = new System.Drawing.Point(338, 849);
+            this.ModifyInventory.Location = new System.Drawing.Point(321, 674);
             this.ModifyInventory.Name = "ModifyInventory";
             this.ModifyInventory.Size = new System.Drawing.Size(141, 46);
             this.ModifyInventory.TabIndex = 47;
@@ -494,7 +440,7 @@
             // 
             // ModifyDesc
             // 
-            this.ModifyDesc.Location = new System.Drawing.Point(562, 849);
+            this.ModifyDesc.Location = new System.Drawing.Point(545, 674);
             this.ModifyDesc.Name = "ModifyDesc";
             this.ModifyDesc.Size = new System.Drawing.Size(133, 46);
             this.ModifyDesc.TabIndex = 48;
@@ -504,7 +450,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(787, 849);
+            this.button1.Location = new System.Drawing.Point(770, 674);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(136, 46);
             this.button1.TabIndex = 49;
@@ -519,93 +465,89 @@
             "Snack",
             "Drink",
             "Item"});
-            this.TableDropDown.Location = new System.Drawing.Point(100, 861);
+            this.TableDropDown.Location = new System.Drawing.Point(83, 686);
             this.TableDropDown.Name = "TableDropDown";
-            this.TableDropDown.Size = new System.Drawing.Size(178, 24);
+            this.TableDropDown.Size = new System.Drawing.Size(178, 21);
             this.TableDropDown.TabIndex = 50;
             // 
             // NameTextBox
             // 
-            this.NameTextBox.Location = new System.Drawing.Point(129, 821);
+            this.NameTextBox.Location = new System.Drawing.Point(112, 646);
             this.NameTextBox.Name = "NameTextBox";
-            this.NameTextBox.Size = new System.Drawing.Size(100, 22);
+            this.NameTextBox.Size = new System.Drawing.Size(100, 20);
             this.NameTextBox.TabIndex = 51;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(126, 787);
+            this.label5.Location = new System.Drawing.Point(109, 612);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(120, 16);
+            this.label5.Size = new System.Drawing.Size(98, 13);
             this.label5.TabIndex = 52;
             this.label5.Text = "Enter Name of Item";
             // 
             // InventoryInput
             // 
-            this.InventoryInput.Location = new System.Drawing.Point(367, 821);
+            this.InventoryInput.Location = new System.Drawing.Point(350, 646);
             this.InventoryInput.Name = "InventoryInput";
-            this.InventoryInput.Size = new System.Drawing.Size(100, 22);
+            this.InventoryInput.Size = new System.Drawing.Size(100, 20);
             this.InventoryInput.TabIndex = 53;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(312, 787);
+            this.label11.Location = new System.Drawing.Point(295, 612);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(215, 16);
+            this.label11.Size = new System.Drawing.Size(174, 13);
             this.label11.TabIndex = 54;
             this.label11.Text = "Number to add to existing Inventory";
             // 
             // DescriptionInput
             // 
-            this.DescriptionInput.Location = new System.Drawing.Point(547, 821);
+            this.DescriptionInput.Location = new System.Drawing.Point(530, 646);
             this.DescriptionInput.Name = "DescriptionInput";
-            this.DescriptionInput.Size = new System.Drawing.Size(161, 22);
+            this.DescriptionInput.Size = new System.Drawing.Size(161, 20);
             this.DescriptionInput.TabIndex = 55;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(577, 787);
+            this.label12.Location = new System.Drawing.Point(560, 612);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(105, 16);
+            this.label12.Size = new System.Drawing.Size(85, 13);
             this.label12.TabIndex = 56;
             this.label12.Text = "New Description";
             // 
             // NameInput
             // 
-            this.NameInput.Location = new System.Drawing.Point(807, 821);
+            this.NameInput.Location = new System.Drawing.Point(790, 646);
             this.NameInput.Name = "NameInput";
-            this.NameInput.Size = new System.Drawing.Size(100, 22);
+            this.NameInput.Size = new System.Drawing.Size(100, 20);
             this.NameInput.TabIndex = 57;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(819, 787);
+            this.label13.Location = new System.Drawing.Point(802, 612);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(74, 16);
+            this.label13.Size = new System.Drawing.Size(60, 13);
             this.label13.TabIndex = 58;
             this.label13.Text = "New Name";
             // 
-            // InventoryTableChoice
+            // listBoxOutOfStock
             // 
-            this.InventoryTableChoice.FormattingEnabled = true;
-            this.InventoryTableChoice.Items.AddRange(new object[] {
-            "snack",
-            "drink",
-            "item"});
-            this.InventoryTableChoice.Location = new System.Drawing.Point(112, 374);
-            this.InventoryTableChoice.Name = "InventoryTableChoice";
-            this.InventoryTableChoice.Size = new System.Drawing.Size(201, 24);
-            this.InventoryTableChoice.TabIndex = 59;
+            this.listBoxOutOfStock.FormattingEnabled = true;
+            this.listBoxOutOfStock.Location = new System.Drawing.Point(84, 330);
+            this.listBoxOutOfStock.Margin = new System.Windows.Forms.Padding(1);
+            this.listBoxOutOfStock.Name = "listBoxOutOfStock";
+            this.listBoxOutOfStock.Size = new System.Drawing.Size(609, 212);
+            this.listBoxOutOfStock.TabIndex = 17;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1924, 923);
-            this.Controls.Add(this.InventoryTableChoice);
+            this.ClientSize = new System.Drawing.Size(1856, 889);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.NameInput);
             this.Controls.Add(this.label12);
@@ -618,7 +560,6 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.ModifyDesc);
             this.Controls.Add(this.ModifyInventory);
-            this.Controls.Add(this.InventoryReport);
             this.Controls.Add(this.AvailableItems);
             this.Controls.Add(this.AvailableDrinks);
             this.Controls.Add(this.AvailableSnacks);
@@ -644,7 +585,6 @@
             this.Controls.Add(this.viewItemButton);
             this.Controls.Add(this.viewDrinkButton);
             this.Controls.Add(this.viewSnackButton);
-            this.ClientSize = new System.Drawing.Size(1500, 750);
             this.Controls.Add(this.listBoxOutOfStock);
             this.Controls.Add(this.addFundsTextBox);
             this.Controls.Add(this.addFunds);
@@ -707,7 +647,6 @@
         private System.Windows.Forms.Button AvailableSnacks;
         private System.Windows.Forms.Button AvailableDrinks;
         private System.Windows.Forms.Button AvailableItems;
-        private System.Windows.Forms.Button InventoryReport;
         private System.Windows.Forms.Button ModifyInventory;
         private System.Windows.Forms.Button ModifyDesc;
         private System.Windows.Forms.Button button1;
@@ -720,7 +659,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox NameInput;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.ComboBox InventoryTableChoice;
         private System.Windows.Forms.ListBox listBoxOutOfStock;
     }
 }
