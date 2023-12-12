@@ -233,7 +233,8 @@ namespace ACMSnackDatabase
 
                 customers.Add(customer);
             }
-
+            // Clears the list box so that customers are not doubled
+            listBox2.Items.Clear();
             int count = customers.Count;
             for (int i = 0; i < count; i++)
             {
@@ -709,50 +710,8 @@ namespace ACMSnackDatabase
                     cmd.ExecuteNonQuery();
                     conn.Close();
 
-
-                    listBox2.Items.Clear();
-
-                    conn.Open();
-
-                    query = "SELECT * FROM customer";
-                    cmd = new NpgsqlCommand(query, conn);
-                    cmd.Prepare();
-
-                    NpgsqlDataReader reader = cmd.ExecuteReader();
-
-                    List<Customer> customers = new List<Customer>();
-
-                    while (reader.Read())
-                    {
-                        Customer customer = new Customer((Convert.ToInt32(reader["userid"])),
-                            (Convert.ToString(reader["nickname"])),
-                            (Convert.ToDecimal(reader["debit"])));
-
-                        customers.Add(customer);
-                    }
-
-                    int count = customers.Count;
-
-                    customerList.Clear(); //clear the global list, prep it for recreation
-
-                    for (int i = 0; i < count; i++)
-                    {
-                        int highest = int.MaxValue;
-                        int highestIndex = int.MaxValue;
-                        for (int j = 0; j < customers.Count; j++)
-                        {
-                            if (customers[j].userid < highest)
-                            {
-                                highest = customers[j].userid;
-                                highestIndex = j;
-                            }
-                        }
-                        listBox2.Items.Add(customers[highestIndex].ToString());
-                        customerList.Add(customers[highestIndex]); // fill the "global" list
-                        customers.RemoveAt(highestIndex);
-                    }
-
-                    conn.Close();
+                    // Calls update customers method that repopulates the listbox with new information
+                    updateCustomers();
 
                     // -- THANK YOU POP UP --
 
