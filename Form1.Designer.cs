@@ -107,6 +107,10 @@
             this.removeIDBox = new System.Windows.Forms.TextBox();
             this.removeButton = new System.Windows.Forms.Button();
             this.viewTransactionsButton = new System.Windows.Forms.Button();
+            this.deleteUserButton = new System.Windows.Forms.Button();
+            this.deleteUserLabel = new System.Windows.Forms.Label();
+            this.idLabel = new System.Windows.Forms.Label();
+            this.userDeleteTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // OutOfStockButton
@@ -170,6 +174,7 @@
             // 
             this.addButton.Location = new System.Drawing.Point(1500, 202);
             this.addButton.Margin = new System.Windows.Forms.Padding(4);
+            this.addButton.Location = new System.Drawing.Point(1079, 164);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(100, 28);
             this.addButton.TabIndex = 9;
@@ -823,6 +828,40 @@
             this.viewTransactionsButton.Text = "View Transactions";
             this.viewTransactionsButton.UseVisualStyleBackColor = true;
             this.viewTransactionsButton.Click += new System.EventHandler(this.viewTransactionsButton_Click);
+            // deleteUserButton
+            // 
+            this.deleteUserButton.Location = new System.Drawing.Point(1396, 152);
+            this.deleteUserButton.Name = "deleteUserButton";
+            this.deleteUserButton.Size = new System.Drawing.Size(88, 46);
+            this.deleteUserButton.TabIndex = 61;
+            this.deleteUserButton.Text = "Delete selected user";
+            this.deleteUserButton.UseVisualStyleBackColor = true;
+            this.deleteUserButton.Click += new System.EventHandler(this.deleteUserButton_Click);
+            // 
+            // deleteUserLabel
+            // 
+            this.deleteUserLabel.AutoSize = true;
+            this.deleteUserLabel.Location = new System.Drawing.Point(1308, 54);
+            this.deleteUserLabel.Name = "deleteUserLabel";
+            this.deleteUserLabel.Size = new System.Drawing.Size(72, 13);
+            this.deleteUserLabel.TabIndex = 62;
+            this.deleteUserLabel.Text = "Delete a User";
+            // 
+            // idLabel
+            // 
+            this.idLabel.AutoSize = true;
+            this.idLabel.Location = new System.Drawing.Point(1356, 82);
+            this.idLabel.Name = "idLabel";
+            this.idLabel.Size = new System.Drawing.Size(168, 13);
+            this.idLabel.TabIndex = 63;
+            this.idLabel.Text = "Type ID of user you wish to delete";
+            // 
+            // userDeleteTextBox
+            // 
+            this.userDeleteTextBox.Location = new System.Drawing.Point(1396, 115);
+            this.userDeleteTextBox.Name = "userDeleteTextBox";
+            this.userDeleteTextBox.Size = new System.Drawing.Size(100, 20);
+            this.userDeleteTextBox.TabIndex = 64;
             // 
             // Form1
             // 
@@ -853,6 +892,10 @@
             this.Controls.Add(this.itemCostBox);
             this.Controls.Add(this.itemNameBox);
             this.ClientSize = new System.Drawing.Size(1856, 889);
+            this.Controls.Add(this.userDeleteTextBox);
+            this.Controls.Add(this.idLabel);
+            this.Controls.Add(this.deleteUserLabel);
+            this.Controls.Add(this.deleteUserButton);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.NameInput);
             this.Controls.Add(this.label12);
@@ -987,6 +1030,10 @@
         private System.Windows.Forms.TextBox removeIDBox;
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.Button viewTransactionsButton;
+        private System.Windows.Forms.Button deleteUserButton;
+        private System.Windows.Forms.Label deleteUserLabel;
+        private System.Windows.Forms.Label idLabel;
+        private System.Windows.Forms.TextBox userDeleteTextBox;
     }
 }
 

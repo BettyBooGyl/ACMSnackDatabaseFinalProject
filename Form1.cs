@@ -112,10 +112,10 @@ namespace ACMSnackDatabase
     }
 
     public partial class Form1 : Form
-    {
-        // ----- !!! PLEASE PUT YOUR PASSWORD IN THE PASSWORD SECTION IN THE CONNECTION STRING OTHERWI ( HERE ) SE IT WILL NOT WORK; 111 ----- \\
-        static string connection = "Host=localhost;Port=5432;Database=366Project;Username=postgres;Password=Dijon0416;Persist Security Info=True";
-
+    { 
+        // ----- !!! PLEASE PUT YOUR PASSWORD IN THE PASSWORD SECTION IN THE CONNECTION STRING OTHERWI ( HERE ) SE IT WILL NOT WORK; !!! ----- \\
+        static string connection = "Host=localhost;Port=5432;Database=ACMSnackDatabase;Username=postgres;Password=Elizabeth1;Persist Security Info=True";
+        
         // these are so that I can access an ordered list of the items and customers wherever.
         public List<Item> itemList = new List<Item>();
         public List<Customer> customerList = new List<Customer>();
@@ -1139,6 +1139,45 @@ namespace ACMSnackDatabase
                 conn.Close();
             }catch(Exception ex){
 
+            }
+        }
+
+        private void deleteUserButton_Click(object sender, EventArgs e)
+        {
+            // Get db connection to update inventory
+            NpgsqlConnection conn = new NpgsqlConnection(connection);
+
+            // Open connection to db
+            conn.Open();
+
+            // Make command for db
+            string query = "DELETE FROM customer WHERE userID = @userID";
+
+            NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+            if (userDeleteTextBox.Text.Trim().Length > 0)
+            {
+                cmd.Parameters.AddWithValue("@userID", Convert.ToInt32(userDeleteTextBox.Text.Trim()));
+
+                cmd.Prepare();
+
+                cmd.ExecuteNonQuery();
+                conn.Close();
+                string message = "The user has been removed!";
+                string caption = "User Removed";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                DialogResult result;
+
+                result = MessageBox.Show(message, caption, buttons);
+                updateCustomers();
+            }
+            else
+            {
+                string message = "A user must have a valid ID!";
+                string caption = "Invalid Input";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                DialogResult result;
+
+                result = MessageBox.Show(message, caption, buttons);
             }
         }
     }
