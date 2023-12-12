@@ -452,7 +452,7 @@ namespace ACMSnackDatabase
             // Make command for db
             string query = "SELECT price FROM item WHERE itemid = @selectedIndex";
             NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@selectedIndex", listItemBox.SelectedIndex + 1); // idk how to get the selectedItem.itemid out of the listbox, possibly because it dosnt exist because I am doing this wrong with a listbox when I should be using a datagridview but as long as we dont delete records, this should work.
+            cmd.Parameters.AddWithValue("@selectedIndex", itemList[listItemBox.SelectedIndex].itemid); // idk how to get the selectedItem.itemid out of the listbox, possibly because it dosnt exist because I am doing this wrong with a listbox when I should be using a datagridview but as long as we dont delete records, this should work.
             cmd.Prepare();
 
             // Get data out of command and get object
@@ -480,7 +480,7 @@ namespace ACMSnackDatabase
             // Make command for db
             query = "SELECT debit FROM customer WHERE userid = @selectedIndex";
             cmd = new NpgsqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@selectedIndex", listBox2.SelectedIndex + 1); // idk how to get the selectedItem.userid out of the listbox, possibly because it dosnt exist because I am doing this wrong with a listbox when I should be using a datagridview but as long as we dont delete records, this should work.
+            cmd.Parameters.AddWithValue("@selectedIndex", customerList[listBox2.SelectedIndex].userid); // idk how to get the selectedItem.userid out of the listbox, possibly because it dosnt exist because I am doing this wrong with a listbox when I should be using a datagridview but as long as we dont delete records, this should work.
             cmd.Prepare();
 
             // Get data out of command and get object
@@ -508,7 +508,7 @@ namespace ACMSnackDatabase
             // Make command for db
             query = "SELECT inventory FROM item WHERE itemid = @selectedIndex";
             cmd = new NpgsqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@selectedIndex", listItemBox.SelectedIndex + 1); // idk how to get the selectedItem.userid out of the listbox, possibly because it dosnt exist because I am doing this wrong with a listbox when I should be using a datagridview but as long as we dont delete records, this should work.
+            cmd.Parameters.AddWithValue("@selectedIndex", itemList[listItemBox.SelectedIndex].itemid); // idk how to get the selectedItem.userid out of the listbox, possibly because it dosnt exist because I am doing this wrong with a listbox when I should be using a datagridview but as long as we dont delete records, this should work.
             cmd.Prepare();
 
             // Get data out of command and get object
@@ -1038,22 +1038,10 @@ namespace ACMSnackDatabase
 
                 // Make command for db
                 string name = NameTextBox.Text;
-                string table = TableDropDown.SelectedItem.ToString(); 
                 int setInventory = int.Parse(InventoryInput.Text);
-                string query = "";
-                if (table == "Item")
-                {
-                    query = "UPDATE " + table + " SET inventory = inventory + " + setInventory + " WHERE itemName = '" + name + "'";
+                string query = "UPDATE item SET inventory = inventory + " + setInventory + " WHERE itemName = '" + name + "'";
                     
-                }
-                if (table == "Snack")
-                {
-                    query = "UPDATE " + table + " SET inventory = inventory + " + setInventory + " WHERE snack_name = '" + name + "'";
-                }
-                if (table == "Drink")
-                {
-                    query = "UPDATE " + table + " SET inventory = inventory + " + setInventory + " WHERE drink_name = '" + name + "'";
-                }
+               
                 NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
 
                 cmd.Prepare();
@@ -1080,21 +1068,9 @@ namespace ACMSnackDatabase
                 conn.Open();
 
                 string name = NameTextBox.Text;
-                string table = TableDropDown.SelectedText;
                 string description = DescriptionInput.Text;
-                string query = "";
-                if (table == "item")
-                {
-                    query = "UPDATE " + table + " SET description = " + description + " WHERE itemName = '" + name + "'";
-                }
-                if (table == "snack")
-                {
-                    query = "UPDATE " + table + " SET description = " + description + " WHERE snack_name = '" + name + "'";
-                }
-                if (table == "drink")
-                {
-                    query = "UPDATE " + table + " SET description = " + description + " WHERE drink_name = '" + name + "'";
-                }
+                string query = "UPDATE item SET description = " + description + " WHERE itemName = '" + name + "'";
+                
                 NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
 
                 cmd.Prepare();
@@ -1116,21 +1092,9 @@ namespace ACMSnackDatabase
                 conn.Open();
 
                 string name = NameTextBox.Text;
-                string table = TableDropDown.SelectedText;
                 string newName = NameInput.Text;
-                string query = "";
-                if (table == "item")
-                {
-                    query = "UPDATE " + table + " SET itemName = " + newName + " WHERE itemName = '" + name + "'";
-                }
-                if (table == "snack")
-                {
-                    query = "UPDATE " + table + " SET snack_name = " + newName + " WHERE snack_name = '" + name + "'";
-                }
-                if (table == "drink")
-                {
-                    query = "UPDATE " + table + " SET drink_name = " + newName + " WHERE drink_name = '" + name + "'";
-                }
+                string query  = "UPDATE item SET itemName = " + newName + " WHERE itemName = '" + name + "'";
+                
                 NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
 
                 cmd.Prepare();

@@ -41,10 +41,6 @@
             this.purchase = new System.Windows.Forms.Button();
             this.addFunds = new System.Windows.Forms.Button();
             this.addFundsTextBox = new System.Windows.Forms.TextBox();
-            this.viewSnackButton = new System.Windows.Forms.Button();
-            this.viewDrinkButton = new System.Windows.Forms.Button();
-            this.viewItemButton = new System.Windows.Forms.Button();
-            this.viewTransactions = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -54,13 +50,9 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.AvailableSnacks = new System.Windows.Forms.Button();
-            this.AvailableDrinks = new System.Windows.Forms.Button();
-            this.AvailableItems = new System.Windows.Forms.Button();
             this.ModifyInventory = new System.Windows.Forms.Button();
             this.ModifyDesc = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.TableDropDown = new System.Windows.Forms.ComboBox();
             this.NameTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.InventoryInput = new System.Windows.Forms.TextBox();
@@ -89,11 +81,15 @@
             this.deleteUserLabel = new System.Windows.Forms.Label();
             this.idLabel = new System.Windows.Forms.Label();
             this.userDeleteTextBox = new System.Windows.Forms.TextBox();
+            this.ModifyNameLabel = new System.Windows.Forms.Label();
+            this.ModifyInventoryLabel = new System.Windows.Forms.Label();
+            this.DescriptionLabel = new System.Windows.Forms.Label();
+            this.LabelNameMod = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // OutOfStockButton
             // 
-            this.OutOfStockButton.Location = new System.Drawing.Point(84, 285);
+            this.OutOfStockButton.Location = new System.Drawing.Point(87, 285);
             this.OutOfStockButton.Name = "OutOfStockButton";
             this.OutOfStockButton.Size = new System.Drawing.Size(151, 30);
             this.OutOfStockButton.TabIndex = 0;
@@ -208,47 +204,6 @@
             this.addFundsTextBox.Size = new System.Drawing.Size(73, 20);
             this.addFundsTextBox.TabIndex = 16;
             // 
-            // viewSnackButton
-            // 
-            this.viewSnackButton.Location = new System.Drawing.Point(254, 304);
-            this.viewSnackButton.Margin = new System.Windows.Forms.Padding(2);
-            this.viewSnackButton.Name = "viewSnackButton";
-            this.viewSnackButton.Size = new System.Drawing.Size(80, 30);
-            this.viewSnackButton.TabIndex = 17;
-            this.viewSnackButton.Text = "View Snacks";
-            this.viewSnackButton.UseVisualStyleBackColor = true;
-            this.viewSnackButton.Click += new System.EventHandler(this.viewSnackButton_Click);
-            // 
-            // viewDrinkButton
-            // 
-            this.viewDrinkButton.Location = new System.Drawing.Point(343, 304);
-            this.viewDrinkButton.Margin = new System.Windows.Forms.Padding(2);
-            this.viewDrinkButton.Name = "viewDrinkButton";
-            this.viewDrinkButton.Size = new System.Drawing.Size(74, 30);
-            this.viewDrinkButton.TabIndex = 18;
-            this.viewDrinkButton.Text = "View Drinks";
-            this.viewDrinkButton.UseVisualStyleBackColor = true;
-            // 
-            // viewItemButton
-            // 
-            this.viewItemButton.Location = new System.Drawing.Point(432, 304);
-            this.viewItemButton.Margin = new System.Windows.Forms.Padding(2);
-            this.viewItemButton.Name = "viewItemButton";
-            this.viewItemButton.Size = new System.Drawing.Size(80, 30);
-            this.viewItemButton.TabIndex = 19;
-            this.viewItemButton.Text = "View Items";
-            this.viewItemButton.UseVisualStyleBackColor = true;
-            // 
-            // viewTransactions
-            // 
-            this.viewTransactions.Location = new System.Drawing.Point(539, 256);
-            this.viewTransactions.Name = "viewTransactions";
-            this.viewTransactions.Size = new System.Drawing.Size(151, 30);
-            this.viewTransactions.TabIndex = 20;
-            this.viewTransactions.Text = "View Transactions";
-            this.viewTransactions.UseVisualStyleBackColor = true;
-            this.viewTransactions.Click += new System.EventHandler(this.viewTransactions_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -348,39 +303,9 @@
             this.label10.TabIndex = 36;
             this.label10.Text = "Has Caffine? (t/f)";
             // 
-            // AvailableSnacks
-            // 
-            this.AvailableSnacks.Location = new System.Drawing.Point(254, 245);
-            this.AvailableSnacks.Margin = new System.Windows.Forms.Padding(2);
-            this.AvailableSnacks.Name = "AvailableSnacks";
-            this.AvailableSnacks.Size = new System.Drawing.Size(80, 54);
-            this.AvailableSnacks.TabIndex = 43;
-            this.AvailableSnacks.Text = "View Available Snacks";
-            this.AvailableSnacks.UseVisualStyleBackColor = true;
-            // 
-            // AvailableDrinks
-            // 
-            this.AvailableDrinks.Location = new System.Drawing.Point(343, 245);
-            this.AvailableDrinks.Margin = new System.Windows.Forms.Padding(2);
-            this.AvailableDrinks.Name = "AvailableDrinks";
-            this.AvailableDrinks.Size = new System.Drawing.Size(74, 54);
-            this.AvailableDrinks.TabIndex = 44;
-            this.AvailableDrinks.Text = "View Available Drinks";
-            this.AvailableDrinks.UseVisualStyleBackColor = true;
-            // 
-            // AvailableItems
-            // 
-            this.AvailableItems.Location = new System.Drawing.Point(432, 245);
-            this.AvailableItems.Margin = new System.Windows.Forms.Padding(2);
-            this.AvailableItems.Name = "AvailableItems";
-            this.AvailableItems.Size = new System.Drawing.Size(80, 54);
-            this.AvailableItems.TabIndex = 45;
-            this.AvailableItems.Text = "View Available Items";
-            this.AvailableItems.UseVisualStyleBackColor = true;
-            // 
             // ModifyInventory
             // 
-            this.ModifyInventory.Location = new System.Drawing.Point(275, 628);
+            this.ModifyInventory.Location = new System.Drawing.Point(258, 628);
             this.ModifyInventory.Margin = new System.Windows.Forms.Padding(2);
             this.ModifyInventory.Name = "ModifyInventory";
             this.ModifyInventory.Size = new System.Drawing.Size(106, 37);
@@ -411,22 +336,9 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // TableDropDown
-            // 
-            this.TableDropDown.FormattingEnabled = true;
-            this.TableDropDown.Items.AddRange(new object[] {
-            "Snack",
-            "Drink",
-            "Item"});
-            this.TableDropDown.Location = new System.Drawing.Point(101, 644);
-            this.TableDropDown.Margin = new System.Windows.Forms.Padding(2);
-            this.TableDropDown.Name = "TableDropDown";
-            this.TableDropDown.Size = new System.Drawing.Size(134, 21);
-            this.TableDropDown.TabIndex = 50;
-            // 
             // NameTextBox
             // 
-            this.NameTextBox.Location = new System.Drawing.Point(127, 596);
+            this.NameTextBox.Location = new System.Drawing.Point(87, 596);
             this.NameTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.NameTextBox.Name = "NameTextBox";
             this.NameTextBox.Size = new System.Drawing.Size(76, 20);
@@ -444,7 +356,7 @@
             // 
             // InventoryInput
             // 
-            this.InventoryInput.Location = new System.Drawing.Point(292, 596);
+            this.InventoryInput.Location = new System.Drawing.Point(275, 596);
             this.InventoryInput.Margin = new System.Windows.Forms.Padding(2);
             this.InventoryInput.Name = "InventoryInput";
             this.InventoryInput.Size = new System.Drawing.Size(76, 20);
@@ -634,7 +546,7 @@
             // 
             // viewTransactionsButton
             // 
-            this.viewTransactionsButton.Location = new System.Drawing.Point(556, 286);
+            this.viewTransactionsButton.Location = new System.Drawing.Point(559, 269);
             this.viewTransactionsButton.Margin = new System.Windows.Forms.Padding(2);
             this.viewTransactionsButton.Name = "viewTransactionsButton";
             this.viewTransactionsButton.Size = new System.Drawing.Size(134, 29);
@@ -682,11 +594,51 @@
             this.userDeleteTextBox.Size = new System.Drawing.Size(76, 20);
             this.userDeleteTextBox.TabIndex = 64;
             // 
+            // ModifyNameLabel
+            // 
+            this.ModifyNameLabel.AutoSize = true;
+            this.ModifyNameLabel.Location = new System.Drawing.Point(84, 567);
+            this.ModifyNameLabel.Name = "ModifyNameLabel";
+            this.ModifyNameLabel.Size = new System.Drawing.Size(137, 15);
+            this.ModifyNameLabel.TabIndex = 65;
+            this.ModifyNameLabel.Text = "Name of Item To Modify";
+            // 
+            // ModifyInventoryLabel
+            // 
+            this.ModifyInventoryLabel.AutoSize = true;
+            this.ModifyInventoryLabel.Location = new System.Drawing.Point(267, 572);
+            this.ModifyInventoryLabel.Name = "ModifyInventoryLabel";
+            this.ModifyInventoryLabel.Size = new System.Drawing.Size(92, 15);
+            this.ModifyInventoryLabel.TabIndex = 66;
+            this.ModifyInventoryLabel.Text = "Inventory to Add";
+            // 
+            // DescriptionLabel
+            // 
+            this.DescriptionLabel.AutoSize = true;
+            this.DescriptionLabel.Location = new System.Drawing.Point(428, 572);
+            this.DescriptionLabel.Name = "DescriptionLabel";
+            this.DescriptionLabel.Size = new System.Drawing.Size(97, 15);
+            this.DescriptionLabel.TabIndex = 67;
+            this.DescriptionLabel.Text = "New Description";
+            // 
+            // LabelNameMod
+            // 
+            this.LabelNameMod.AutoSize = true;
+            this.LabelNameMod.Location = new System.Drawing.Point(585, 572);
+            this.LabelNameMod.Name = "LabelNameMod";
+            this.LabelNameMod.Size = new System.Drawing.Size(69, 15);
+            this.LabelNameMod.TabIndex = 68;
+            this.LabelNameMod.Text = "New Name";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1826, 1055);
+            this.Controls.Add(this.LabelNameMod);
+            this.Controls.Add(this.DescriptionLabel);
+            this.Controls.Add(this.ModifyInventoryLabel);
+            this.Controls.Add(this.ModifyNameLabel);
             this.Controls.Add(this.viewTransactionsButton);
             this.Controls.Add(this.removeButton);
             this.Controls.Add(this.removeIDBox);
@@ -713,13 +665,9 @@
             this.Controls.Add(this.InventoryInput);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.NameTextBox);
-            this.Controls.Add(this.TableDropDown);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.ModifyDesc);
             this.Controls.Add(this.ModifyInventory);
-            this.Controls.Add(this.AvailableItems);
-            this.Controls.Add(this.AvailableDrinks);
-            this.Controls.Add(this.AvailableSnacks);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label8);
@@ -730,10 +678,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listAvailableButton);
-            this.Controls.Add(this.viewTransactions);
-            this.Controls.Add(this.viewItemButton);
-            this.Controls.Add(this.viewDrinkButton);
-            this.Controls.Add(this.viewSnackButton);
             this.Controls.Add(this.listBoxOutOfStock);
             this.Controls.Add(this.addFundsTextBox);
             this.Controls.Add(this.addFunds);
@@ -771,10 +715,6 @@
         private System.Windows.Forms.Button purchase;
         private System.Windows.Forms.Button addFunds;
         private System.Windows.Forms.TextBox addFundsTextBox;
-        private System.Windows.Forms.Button viewSnackButton;
-        private System.Windows.Forms.Button viewDrinkButton;
-        private System.Windows.Forms.Button viewItemButton;
-        private System.Windows.Forms.Button viewTransactions;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -784,13 +724,9 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Button AvailableSnacks;
-        private System.Windows.Forms.Button AvailableDrinks;
-        private System.Windows.Forms.Button AvailableItems;
         private System.Windows.Forms.Button ModifyInventory;
         private System.Windows.Forms.Button ModifyDesc;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox TableDropDown;
         private System.Windows.Forms.TextBox NameTextBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox InventoryInput;
@@ -823,6 +759,10 @@
         private System.Windows.Forms.Label deleteUserLabel;
         private System.Windows.Forms.Label idLabel;
         private System.Windows.Forms.TextBox userDeleteTextBox;
+        private System.Windows.Forms.Label ModifyNameLabel;
+        private System.Windows.Forms.Label ModifyInventoryLabel;
+        private System.Windows.Forms.Label DescriptionLabel;
+        private System.Windows.Forms.Label LabelNameMod;
     }
 }
 
