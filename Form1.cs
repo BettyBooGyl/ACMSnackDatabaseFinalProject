@@ -16,7 +16,6 @@ using Npgsql;
 using System.Diagnostics;
 using System.Numerics;
 using System.Collections;
-using System.Xml.Linq;
 
 namespace ACMSnackDatabase
 {
@@ -95,8 +94,8 @@ namespace ACMSnackDatabase
 
     public partial class Form1 : Form
     { 
-        // ----- !!! PLEASE PUT YOUR PASSWORD IN THE PASSWORD SECTION IN THE CONNECTION STRING OTHERWI ( HERE ) SE IT WILL NOT WORK; 111 ----- \\
-        static string connection = "Host=localhost;Port=5432;Database=DBFinal;Username=postgres;Password=****;Persist Security Info=True";
+        // ----- !!! PLEASE PUT YOUR PASSWORD IN THE PASSWORD SECTION IN THE CONNECTION STRING OTHERWI ( HERE ) SE IT WILL NOT WORK; !!! ----- \\
+        static string connection = "Host=localhost;Port=5432;Database=DBFinal;Username=postgres;Password=jhKat17daJ#-;Persist Security Info=True";
         
         // these are so that I can access an ordered list of the items and customers wherever.
         public List<Item> itemList = new List<Item>();
@@ -329,6 +328,9 @@ namespace ACMSnackDatabase
 
 
             }
+        private void viewSnackButton_Click(object sender, EventArgs e) { }
+
+        private void viewTransactions_Click(object sender, EventArgs e) { }
 
         private void addButton_Click(object sender, EventArgs e)
         {
@@ -734,261 +736,119 @@ namespace ACMSnackDatabase
             }
         }
 
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void snackAdd_Click(object sender, EventArgs e)
-        {
-            using (SqlConnection conn = new SqlConnection(connection))
-            {
-                string name = snackName.Text.Trim();
-                Decimal price = Convert.ToDecimal(snackCost.Text);
-                SqlMoney snackPrice = price;
-                string descrip = snackDescription.Text.Trim();
-                string query = "INSERT INTO[dbo].[snacks] ([name], [price], [description]) VALUES(N'" + name + "', CAST(" + snackPrice + " AS Money), N'" + descrip + "')";
-                SqlCommand cmd = new SqlCommand(query, conn);
-
-                SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
-            }
-        }
-
-        private void DrinkAdd_Click(object sender, EventArgs e)
-        {
-            using (SqlConnection conn = new SqlConnection(connection))
-            {
-                string name = drinkName.Text.Trim();
-                Decimal price = Convert.ToDecimal(drinkCost.Text);
-                SqlMoney drinkPrice = price;
-                string descrip = drinkDescription.Text.Trim();
-                string isCaf = isCaffinated.Text.Trim();
-                Boolean caffine = false;
-                isCaf = isCaf.ToLower();   
-                if (isCaf == "t")
-                {
-                    caffine = true;
-                }
-                string query = "INSERT INTO[dbo].[drinks] ([name], [price], [description], [is_caffinated]) VALUES(N'" + name + "', CAST(" + drinkPrice + " AS Money), N'" + descrip + "', N'" + caffine +"')";
-                SqlCommand cmd = new SqlCommand(query, conn);
-
-                SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
-            }
-        }
-
-        private void AvailableSnacks_Click(object sender, EventArgs e)
-        {
-            using (SqlConnection conn = new SqlConnection(connection))
-            {
-                string query = "SELECT snack_name, price, description FROM snacks WHERE inventory > 0";
-                SqlCommand cmd = new SqlCommand(query, conn);
-
-                SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
-
-                DataSet ds = new DataSet();
-                dAdapter.Fill(ds);
-                OutOfStockGridView.ReadOnly = true;
-                OutOfStockGridView.DataSource = ds.Tables[0];
-            }
-        }
-
-        private void AvailableDrinks_Click(object sender, EventArgs e)
-        {
-            using (SqlConnection conn = new SqlConnection(connection))
-            {
-                string query = "SELECT drink_name, price, description FROM drink WHERE inventory > 0";
-                SqlCommand cmd = new SqlCommand(query, conn);
-
-                SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
-
-                DataSet ds = new DataSet();
-                dAdapter.Fill(ds);
-                OutOfStockGridView.ReadOnly = true;
-                OutOfStockGridView.DataSource = ds.Tables[0];
-            }
-        }
-
-        private void AvailableItems_Click(object sender, EventArgs e)
-        {
-            using (SqlConnection conn = new SqlConnection(connection))
-            {
-                string query = "SELECT itemName, price, description FROM item WHERE inventory > 0";
-                SqlCommand cmd = new SqlCommand(query, conn);
-
-                SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
-
-                DataSet ds = new DataSet();
-                dAdapter.Fill(ds);
-                OutOfStockGridView.ReadOnly = true;
-                OutOfStockGridView.DataSource = ds.Tables[0];
-            }
-        }
-
-        private void InventoryReport_Click(object sender, EventArgs e)
-        {
-            using (SqlConnection conn = new SqlConnection(connection))
-            {
-                string table = InventoryTableChoice.Text;
-                string query = "";
-                if (table == "item")
-                {
-                    query = "SELECT itemName, inventory FROM " + table;
-                }
-                if (table == "snack")
-                {
-                    query = "SELECT snack_name, inventory FROM " + table;
-                }
-                if (table == "drink")
-                {
-                    query = "SELECT drink_name, inventory FROM " + table;
-                }
-                SqlCommand cmd = new SqlCommand(query, conn);
-
-                SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
-
-                DataSet ds = new DataSet();
-                dAdapter.Fill(ds);
-                OutOfStockGridView.ReadOnly = true;
-                OutOfStockGridView.DataSource = ds.Tables[0];
-            }
-        }
-
         private void ModifyInventory_Click(object sender, EventArgs e)
         {
-            using (SqlConnection conn = new SqlConnection(connection))
+            try
             {
+                // Get db connection to update inventory
+                NpgsqlConnection conn = new NpgsqlConnection(connection);
+
+                // Open connection to db
+                conn.Open();
+
+                // Make command for db
                 string name = NameTextBox.Text;
-                string table = TableDropDown.SelectedText;
+                string table = TableDropDown.SelectedItem.ToString(); 
                 int setInventory = int.Parse(InventoryInput.Text);
                 string query = "";
-                if (table == "item")
+                if (table == "Item")
                 {
-                    query = "UPDATE " + table + " SET inventory = inventory + " + setInventory + " WHERE itemName = " + name;
+                    query = "UPDATE " + table + " SET inventory = inventory + " + setInventory + " WHERE itemName = '" + name + "'";
+                    
                 }
-                if (table == "snack")
+                if (table == "Snack")
                 {
-                    query = "UPDATE " + table + " SET inventory = inventory + " + setInventory + " WHERE snack_name = " + name;
+                    query = "UPDATE " + table + " SET inventory = inventory + " + setInventory + " WHERE snack_name = '" + name + "'";
                 }
-                if (table == "drink")
+                if (table == "Drink")
                 {
-                    query = "UPDATE " + table + " SET inventory = inventory + " + setInventory + " WHERE drink_name = " + name;
+                    query = "UPDATE " + table + " SET inventory = inventory + " + setInventory + " WHERE drink_name = '" + name + "'";
                 }
-                SqlCommand cmd = new SqlCommand(query, conn);
+                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
 
-                SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
+                cmd.Prepare();
 
-                DataSet ds = new DataSet();
-                dAdapter.Fill(ds);
-                OutOfStockGridView.ReadOnly = true;
-                OutOfStockGridView.DataSource = ds.Tables[0];
+                cmd.ExecuteNonQuery();
+                conn.Close();
+
+                
+            }catch(Exception ex)
+            {
+
             }
+            
         }
 
         private void ModifyDesc_Click(object sender, EventArgs e)
         {
-            using (SqlConnection conn = new SqlConnection(connection))
+            try
             {
+                // Get db connection to update inventory
+                NpgsqlConnection conn = new NpgsqlConnection(connection);
+
+                // Open connection to db
+                conn.Open();
+
                 string name = NameTextBox.Text;
                 string table = TableDropDown.SelectedText;
                 string description = DescriptionInput.Text;
                 string query = "";
                 if (table == "item")
                 {
-                    query = "UPDATE " + table + " SET description = " + description + " WHERE itemName = " + name;
+                    query = "UPDATE " + table + " SET description = " + description + " WHERE itemName = '" + name + "'";
                 }
                 if (table == "snack")
                 {
-                    query = "UPDATE " + table + " SET description = " + description + " WHERE snack_name = " + name;
+                    query = "UPDATE " + table + " SET description = " + description + " WHERE snack_name = '" + name + "'";
                 }
                 if (table == "drink")
                 {
-                    query = "UPDATE " + table + " SET description = " + description + " WHERE drink_name = " + name;
+                    query = "UPDATE " + table + " SET description = " + description + " WHERE drink_name = '" + name + "'";
                 }
-                SqlCommand cmd = new SqlCommand(query, conn);
+                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
 
-                SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
+                cmd.Prepare();
 
-                DataSet ds = new DataSet();
-                dAdapter.Fill(ds);
-                OutOfStockGridView.ReadOnly = true;
-                OutOfStockGridView.DataSource = ds.Tables[0];
-            }
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }catch(Exception ex) { }
+            
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            using (SqlConnection conn = new SqlConnection(connection))
+            try
             {
+                // Get db connection to update inventory
+                NpgsqlConnection conn = new NpgsqlConnection(connection);
+
+                // Open connection to db
+                conn.Open();
+
                 string name = NameTextBox.Text;
                 string table = TableDropDown.SelectedText;
                 string newName = NameInput.Text;
                 string query = "";
                 if (table == "item")
                 {
-                    query = "UPDATE " + table + " SET itemName = " + newName + " WHERE itemName = " + name;
+                    query = "UPDATE " + table + " SET itemName = " + newName + " WHERE itemName = '" + name + "'";
                 }
                 if (table == "snack")
                 {
-                    query = "UPDATE " + table + " SET snack_name = " + newName + " WHERE snack_name = " + name;
+                    query = "UPDATE " + table + " SET snack_name = " + newName + " WHERE snack_name = '" + name + "'";
                 }
                 if (table == "drink")
                 {
-                    query = "UPDATE " + table + " SET drink_name = " + newName + " WHERE drink_name = " + name;
+                    query = "UPDATE " + table + " SET drink_name = " + newName + " WHERE drink_name = '" + name + "'";
                 }
-                SqlCommand cmd = new SqlCommand(query, conn);
+                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
 
-                SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
+                cmd.Prepare();
 
-                DataSet ds = new DataSet();
-                dAdapter.Fill(ds);
-                OutOfStockGridView.ReadOnly = true;
-                OutOfStockGridView.DataSource = ds.Tables[0];
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }catch(Exception ex){
+
             }
         }
     }
