@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.OutOfStockButton = new System.Windows.Forms.Button();
-            this.OutOfStockGridView = new System.Windows.Forms.DataGridView();
-            this.DisplayUserButton = new System.Windows.Forms.Button();
             this.nicnameTextBox = new System.Windows.Forms.TextBox();
             this.debitBox1 = new System.Windows.Forms.TextBox();
             this.nicknameLabel = new System.Windows.Forms.Label();
@@ -39,44 +37,22 @@
             this.addButton = new System.Windows.Forms.Button();
             this.NukeAll = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.UsersGridView = new System.Windows.Forms.DataGridView();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.purchase = new System.Windows.Forms.Button();
             this.addFunds = new System.Windows.Forms.Button();
             this.addFundsTextBox = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.OutOfStockGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UsersGridView)).BeginInit();
+            this.listBoxOutOfStock = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // OutOfStockButton
             // 
-            this.OutOfStockButton.Location = new System.Drawing.Point(84, 256);
+            this.OutOfStockButton.Location = new System.Drawing.Point(84, 560);
             this.OutOfStockButton.Name = "OutOfStockButton";
             this.OutOfStockButton.Size = new System.Drawing.Size(151, 30);
             this.OutOfStockButton.TabIndex = 0;
             this.OutOfStockButton.Text = "Check Out of stock items";
             this.OutOfStockButton.UseVisualStyleBackColor = true;
             this.OutOfStockButton.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // OutOfStockGridView
-            // 
-            this.OutOfStockGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.OutOfStockGridView.Location = new System.Drawing.Point(84, 304);
-            this.OutOfStockGridView.Name = "OutOfStockGridView";
-            this.OutOfStockGridView.RowHeadersWidth = 123;
-            this.OutOfStockGridView.Size = new System.Drawing.Size(606, 261);
-            this.OutOfStockGridView.TabIndex = 1;
-            this.OutOfStockGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // DisplayUserButton
-            // 
-            this.DisplayUserButton.Location = new System.Drawing.Point(727, 304);
-            this.DisplayUserButton.Name = "DisplayUserButton";
-            this.DisplayUserButton.Size = new System.Drawing.Size(151, 30);
-            this.DisplayUserButton.TabIndex = 3;
-            this.DisplayUserButton.Text = "Display Users";
-            this.DisplayUserButton.UseVisualStyleBackColor = true;
-            this.DisplayUserButton.Click += new System.EventHandler(this.DisplayUserButton_Click);
             // 
             // nicnameTextBox
             // 
@@ -132,7 +108,7 @@
             // NukeAll
             // 
             this.NukeAll.Location = new System.Drawing.Point(1125, 491);
-            this.NukeAll.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.NukeAll.Margin = new System.Windows.Forms.Padding(1);
             this.NukeAll.Name = "NukeAll";
             this.NukeAll.Size = new System.Drawing.Size(114, 24);
             this.NukeAll.TabIndex = 11;
@@ -144,25 +120,16 @@
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(84, 31);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(1);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(609, 212);
             this.listBox1.TabIndex = 12;
-            // 
-            // UsersGridView
-            // 
-            this.UsersGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.UsersGridView.Location = new System.Drawing.Point(727, 351);
-            this.UsersGridView.Name = "UsersGridView";
-            this.UsersGridView.RowHeadersWidth = 123;
-            this.UsersGridView.Size = new System.Drawing.Size(291, 261);
-            this.UsersGridView.TabIndex = 2;
             // 
             // listBox2
             // 
             this.listBox2.FormattingEnabled = true;
             this.listBox2.Location = new System.Drawing.Point(727, 31);
-            this.listBox2.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.listBox2.Margin = new System.Windows.Forms.Padding(1);
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(246, 212);
             this.listBox2.TabIndex = 13;
@@ -194,11 +161,21 @@
             this.addFundsTextBox.Size = new System.Drawing.Size(73, 20);
             this.addFundsTextBox.TabIndex = 16;
             // 
+            // listBoxOutOfStock
+            // 
+            this.listBoxOutOfStock.FormattingEnabled = true;
+            this.listBoxOutOfStock.Location = new System.Drawing.Point(84, 330);
+            this.listBoxOutOfStock.Margin = new System.Windows.Forms.Padding(1);
+            this.listBoxOutOfStock.Name = "listBoxOutOfStock";
+            this.listBoxOutOfStock.Size = new System.Drawing.Size(609, 212);
+            this.listBoxOutOfStock.TabIndex = 17;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1500, 750);
+            this.Controls.Add(this.listBoxOutOfStock);
             this.Controls.Add(this.addFundsTextBox);
             this.Controls.Add(this.addFunds);
             this.Controls.Add(this.purchase);
@@ -211,15 +188,10 @@
             this.Controls.Add(this.nicknameLabel);
             this.Controls.Add(this.debitBox1);
             this.Controls.Add(this.nicnameTextBox);
-            this.Controls.Add(this.DisplayUserButton);
-            this.Controls.Add(this.UsersGridView);
-            this.Controls.Add(this.OutOfStockGridView);
             this.Controls.Add(this.OutOfStockButton);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.OutOfStockGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UsersGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -228,8 +200,6 @@
         #endregion
 
         private System.Windows.Forms.Button OutOfStockButton;
-        private System.Windows.Forms.DataGridView OutOfStockGridView;
-        private System.Windows.Forms.Button DisplayUserButton;
         private System.Windows.Forms.TextBox nicnameTextBox;
         private System.Windows.Forms.TextBox debitBox1;
         private System.Windows.Forms.Label nicknameLabel;
@@ -238,11 +208,11 @@
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.Button NukeAll;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.DataGridView UsersGridView;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.Button purchase;
         private System.Windows.Forms.Button addFunds;
         private System.Windows.Forms.TextBox addFundsTextBox;
+        private System.Windows.Forms.ListBox listBoxOutOfStock;
     }
 }
 

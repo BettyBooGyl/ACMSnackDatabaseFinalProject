@@ -29,6 +29,7 @@ namespace ACMSnackDatabase
             this.description = description;
             this.inventory = inventory;
         }
+
         public int itemid;
         public string itemname;
         public decimal price;
@@ -36,6 +37,45 @@ namespace ACMSnackDatabase
         public int inventory;
 
         public override string ToString() => $"{itemid}, {itemname}, {price}, {description}, {inventory}";
+    }
+    public interface Items
+    {
+    }
+    public struct Drink:Items
+    {
+        public string itemname;
+        public decimal price;
+        public string description;
+        public bool is_caffinated;
+        public Drink(string itemname, decimal price, string description, bool is_caffinated)
+        {
+            this.itemname = itemname;
+            this.price = price;
+            this.description = description;
+            this.is_caffinated = is_caffinated;
+
+        }
+        public override string ToString() { 
+            if (is_caffinated) return $"{itemname}, {price}, {description}," + " is cafinated";
+            else return $"{itemname}, {price}, {description}," + " is not cafinated";
+        } 
+    }
+
+    public struct Snack:Items
+    {
+        public string itemname;
+        public decimal price;
+        public string description;
+        public string allergens;
+        public Snack(string itemname, decimal price, string description, string allergens)
+        {
+            this.itemname = itemname;
+            this.price = price;
+            this.description = description;
+            this.allergens = allergens;
+
+        }
+        public override string ToString() => $"{itemname}, {price}, {description}, {allergens}";
     }
     public struct Customer
     {
@@ -55,7 +95,7 @@ namespace ACMSnackDatabase
     public partial class Form1 : Form
     { 
         // ----- !!! PLEASE PUT YOUR PASSWORD IN THE PASSWORD SECTION IN THE CONNECTION STRING OTHERWI ( HERE ) SE IT WILL NOT WORK; 111 ----- \\
-        static string connection = "Host=localhost;Port=5432;Database=DBFinal;Username=postgres;Password=****;Persist Security Info=True";
+        static string connection = "Host=localhost;Database=ACMSnackDatabase;Username=postgres;Password=Elizabeth1;Persist Security Info=True";
         
         // these are so that I can access an ordered list of the items and customers wherever.
         public List<Item> itemList = new List<Item>();
@@ -192,12 +232,17 @@ namespace ACMSnackDatabase
 
         private void button1_Click(object sender, EventArgs e)
         {
-            using (SqlConnection conn = new SqlConnection(connection))
-            {
-                string query = "CREATE TABLE IF NOT EXISTS snacks (itemID serial PRIMARY KEY, snack_name VARCHAR(20) not NULL, price decimal not NULL, description VARCHAR(50), inventory int default 0);";
+                // Get db connection
+                NpgsqlConnection conn = new NpgsqlConnection(connection);
 
-                //string query = "SELECT item.itemname, item.price, item.description, drink.is_caffinated, snack.allergens FROM item LEFT JOIN snack on snack.itemid = item.itemid LEFT JOIN drink on drink.itemid = item.itemid WHERE inventory = 0;";
-                SqlCommand cmd = new SqlCommand(query, conn);
+                // Open connection to db
+                conn.Open();
+
+                //string query = "CREATE TABLE IF NOT EXISTS snacks (itemID serial PRIMARY KEY, snack_name VARCHAR(20) not NULL, price decimal not NULL, description VARCHAR(50), inventory int default 0);";
+
+                string query = "SELECT item.itemname, item.price, item.description, drink.is_caffinated, snack.allergens FROM item LEFT JOIN snack on snack.itemid = item.itemid LEFT JOIN drink on drink.itemid = item.itemid WHERE inventory = 0;";
+                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                cmd.Prepare();
 
                 /*SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
 
@@ -205,43 +250,53 @@ namespace ACMSnackDatabase
                 dAdapter.Fill(ds);
                 OutOfStockGridView.ReadOnly = true;
                 OutOfStockGridView.DataSource = ds.Tables[0]; */
-            }
+                // Get data out of command and get object
+                NpgsqlDataReader reader = cmd.ExecuteReader();
 
-        }
+                // initialization
+                List<Items> items = new List<Items>(); // this will be a memory leak. there is nothing you can do about it. cope and seeth.
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-        }
-
-        private void DisplayUserButton_Click(object sender, EventArgs e)
-        {
-            using (SqlConnection conn = new SqlConnection(connection))
+                // while reader has things to read: make a new item, throw it in the list;
+                while (reader.Read())
+                {
+                    if (reader["allergens"].Equals("")){
+                        Drink drink = new Drink(
+                        (Convert.ToString(reader["itemname"])),
+                        (Convert.ToDecimal(reader["price"])),
+                        (Convert.ToString(reader["description"])), (Convert.ToBoolean(reader["is_caffinated"])));
+                    items.Add(drink);
+                }
+                else
+                {
+                    Snack snack = new Snack(
+                        (Convert.ToString(reader["itemname"])),
+                        (Convert.ToDecimal(reader["price"])),
+                        (Convert.ToString(reader["description"])), (Convert.ToString(reader["allergens"])));
+                    items.Add(snack);
+                }
+                    
+                }
+                 conn.Close();
+            for (int i = 0; i < items.Count; i++)
             {
-                string query = "SELECT nickname, debit FROM customer";
-                SqlCommand cmd = new SqlCommand(query, conn);
-
-                SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
-
-                DataSet ds = new DataSet();
-                dAdapter.Fill(ds);
-                UsersGridView.ReadOnly = true;
-                UsersGridView.DataSource = ds.Tables[0];
+                listBoxOutOfStock.Items.Add(items[i].ToString());
             }
 
-        }
+
+            }
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            using (SqlConnection conn = new SqlConnection(connection))
+
+            using (NpgsqlConnection conn = new NpgsqlConnection(connection))
             {
                 string nickname = nicnameTextBox.Text.Trim();
                 Decimal debit = Convert.ToDecimal(debitBox1.Text);
                 SqlMoney debitMoney = debit;
                 string query = "INSERT INTO[dbo].[customer] ([nickname], [debit]) VALUES(N'" + nickname + "', CAST(" + debitMoney + " AS Money))";
-                SqlCommand cmd = new SqlCommand(query, conn);
+                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
 
-                SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
+                //SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
             }
 
         }
