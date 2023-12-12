@@ -348,7 +348,10 @@ namespace ACMSnackDatabase
             }
 
 
-        }
+            }
+        private void viewSnackButton_Click(object sender, EventArgs e) { }
+
+        private void viewTransactions_Click(object sender, EventArgs e) { }
 
         private void addButton_Click(object sender, EventArgs e)
         {
@@ -1037,6 +1040,121 @@ namespace ACMSnackDatabase
 
         
             
+        }
+        private void ModifyInventory_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Get db connection to update inventory
+                NpgsqlConnection conn = new NpgsqlConnection(connection);
+
+                // Open connection to db
+                conn.Open();
+
+                // Make command for db
+                string name = NameTextBox.Text;
+                string table = TableDropDown.SelectedItem.ToString(); 
+                int setInventory = int.Parse(InventoryInput.Text);
+                string query = "";
+                if (table == "Item")
+                {
+                    query = "UPDATE " + table + " SET inventory = inventory + " + setInventory + " WHERE itemName = '" + name + "'";
+                    
+                }
+                if (table == "Snack")
+                {
+                    query = "UPDATE " + table + " SET inventory = inventory + " + setInventory + " WHERE snack_name = '" + name + "'";
+                }
+                if (table == "Drink")
+                {
+                    query = "UPDATE " + table + " SET inventory = inventory + " + setInventory + " WHERE drink_name = '" + name + "'";
+                }
+                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+
+                cmd.Prepare();
+
+                cmd.ExecuteNonQuery();
+                conn.Close();
+
+                
+            }catch(Exception ex)
+            {
+
+            }
+            
+        }
+
+        private void ModifyDesc_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Get db connection to update inventory
+                NpgsqlConnection conn = new NpgsqlConnection(connection);
+
+                // Open connection to db
+                conn.Open();
+
+                string name = NameTextBox.Text;
+                string table = TableDropDown.SelectedText;
+                string description = DescriptionInput.Text;
+                string query = "";
+                if (table == "item")
+                {
+                    query = "UPDATE " + table + " SET description = " + description + " WHERE itemName = '" + name + "'";
+                }
+                if (table == "snack")
+                {
+                    query = "UPDATE " + table + " SET description = " + description + " WHERE snack_name = '" + name + "'";
+                }
+                if (table == "drink")
+                {
+                    query = "UPDATE " + table + " SET description = " + description + " WHERE drink_name = '" + name + "'";
+                }
+                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+
+                cmd.Prepare();
+
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }catch(Exception ex) { }
+            
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                // Get db connection to update inventory
+                NpgsqlConnection conn = new NpgsqlConnection(connection);
+
+                // Open connection to db
+                conn.Open();
+
+                string name = NameTextBox.Text;
+                string table = TableDropDown.SelectedText;
+                string newName = NameInput.Text;
+                string query = "";
+                if (table == "item")
+                {
+                    query = "UPDATE " + table + " SET itemName = " + newName + " WHERE itemName = '" + name + "'";
+                }
+                if (table == "snack")
+                {
+                    query = "UPDATE " + table + " SET snack_name = " + newName + " WHERE snack_name = '" + name + "'";
+                }
+                if (table == "drink")
+                {
+                    query = "UPDATE " + table + " SET drink_name = " + newName + " WHERE drink_name = '" + name + "'";
+                }
+                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+
+                cmd.Prepare();
+
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }catch(Exception ex){
+
+            }
         }
     }
     
