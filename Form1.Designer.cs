@@ -66,6 +66,23 @@
             this.snackAdd = new System.Windows.Forms.Button();
             this.DrinkAdd = new System.Windows.Forms.Button();
             this.isCaffinated = new System.Windows.Forms.TextBox();
+            this.AvailableSnacks = new System.Windows.Forms.Button();
+            this.AvailableDrinks = new System.Windows.Forms.Button();
+            this.AvailableItems = new System.Windows.Forms.Button();
+            this.InventoryReport = new System.Windows.Forms.Button();
+            this.ModifyInventory = new System.Windows.Forms.Button();
+            this.ModifyDesc = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.TableDropDown = new System.Windows.Forms.ComboBox();
+            this.NameTextBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.InventoryInput = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.DescriptionInput = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.NameInput = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.InventoryTableChoice = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.OutOfStockGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UsersGridView)).BeginInit();
             this.SuspendLayout();
@@ -84,11 +101,11 @@
             // OutOfStockGridView
             // 
             this.OutOfStockGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.OutOfStockGridView.Location = new System.Drawing.Point(112, 374);
+            this.OutOfStockGridView.Location = new System.Drawing.Point(112, 465);
             this.OutOfStockGridView.Margin = new System.Windows.Forms.Padding(4);
             this.OutOfStockGridView.Name = "OutOfStockGridView";
             this.OutOfStockGridView.RowHeadersWidth = 123;
-            this.OutOfStockGridView.Size = new System.Drawing.Size(808, 321);
+            this.OutOfStockGridView.Size = new System.Drawing.Size(808, 288);
             this.OutOfStockGridView.TabIndex = 1;
             this.OutOfStockGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -233,7 +250,7 @@
             // 
             // viewSnackButton
             // 
-            this.viewSnackButton.Location = new System.Drawing.Point(344, 315);
+            this.viewSnackButton.Location = new System.Drawing.Point(338, 374);
             this.viewSnackButton.Name = "viewSnackButton";
             this.viewSnackButton.Size = new System.Drawing.Size(107, 37);
             this.viewSnackButton.TabIndex = 17;
@@ -243,7 +260,7 @@
             // 
             // viewDrinkButton
             // 
-            this.viewDrinkButton.Location = new System.Drawing.Point(457, 315);
+            this.viewDrinkButton.Location = new System.Drawing.Point(457, 374);
             this.viewDrinkButton.Name = "viewDrinkButton";
             this.viewDrinkButton.Size = new System.Drawing.Size(99, 37);
             this.viewDrinkButton.TabIndex = 18;
@@ -252,7 +269,7 @@
             // 
             // viewItemButton
             // 
-            this.viewItemButton.Location = new System.Drawing.Point(562, 315);
+            this.viewItemButton.Location = new System.Drawing.Point(576, 374);
             this.viewItemButton.Name = "viewItemButton";
             this.viewItemButton.Size = new System.Drawing.Size(106, 37);
             this.viewItemButton.TabIndex = 19;
@@ -367,7 +384,7 @@
             this.label6.CausesValidation = false;
             this.label6.Location = new System.Drawing.Point(1796, 557);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(133, 20);
+            this.label6.Size = new System.Drawing.Size(106, 16);
             this.label6.TabIndex = 35;
             this.label6.Text = "Caffinated? (T/F)";
             this.label6.Click += new System.EventHandler(this.label6_Click);
@@ -446,11 +463,187 @@
             this.isCaffinated.Size = new System.Drawing.Size(100, 22);
             this.isCaffinated.TabIndex = 42;
             // 
+            // AvailableSnacks
+            // 
+            this.AvailableSnacks.Location = new System.Drawing.Point(338, 302);
+            this.AvailableSnacks.Name = "AvailableSnacks";
+            this.AvailableSnacks.Size = new System.Drawing.Size(107, 66);
+            this.AvailableSnacks.TabIndex = 43;
+            this.AvailableSnacks.Text = "View Available Snacks";
+            this.AvailableSnacks.UseVisualStyleBackColor = true;
+            this.AvailableSnacks.Click += new System.EventHandler(this.AvailableSnacks_Click);
+            // 
+            // AvailableDrinks
+            // 
+            this.AvailableDrinks.Location = new System.Drawing.Point(457, 302);
+            this.AvailableDrinks.Name = "AvailableDrinks";
+            this.AvailableDrinks.Size = new System.Drawing.Size(99, 66);
+            this.AvailableDrinks.TabIndex = 44;
+            this.AvailableDrinks.Text = "View Available Drinks";
+            this.AvailableDrinks.UseVisualStyleBackColor = true;
+            this.AvailableDrinks.Click += new System.EventHandler(this.AvailableDrinks_Click);
+            // 
+            // AvailableItems
+            // 
+            this.AvailableItems.Location = new System.Drawing.Point(576, 302);
+            this.AvailableItems.Name = "AvailableItems";
+            this.AvailableItems.Size = new System.Drawing.Size(106, 66);
+            this.AvailableItems.TabIndex = 45;
+            this.AvailableItems.Text = "View Available Items";
+            this.AvailableItems.UseVisualStyleBackColor = true;
+            this.AvailableItems.Click += new System.EventHandler(this.AvailableItems_Click);
+            // 
+            // InventoryReport
+            // 
+            this.InventoryReport.Location = new System.Drawing.Point(112, 411);
+            this.InventoryReport.Margin = new System.Windows.Forms.Padding(4);
+            this.InventoryReport.Name = "InventoryReport";
+            this.InventoryReport.Size = new System.Drawing.Size(201, 37);
+            this.InventoryReport.TabIndex = 46;
+            this.InventoryReport.Text = "Inventory Report";
+            this.InventoryReport.UseVisualStyleBackColor = true;
+            this.InventoryReport.Click += new System.EventHandler(this.InventoryReport_Click);
+            // 
+            // ModifyInventory
+            // 
+            this.ModifyInventory.Location = new System.Drawing.Point(338, 849);
+            this.ModifyInventory.Name = "ModifyInventory";
+            this.ModifyInventory.Size = new System.Drawing.Size(141, 46);
+            this.ModifyInventory.TabIndex = 47;
+            this.ModifyInventory.Text = "Modify Inventory";
+            this.ModifyInventory.UseVisualStyleBackColor = true;
+            this.ModifyInventory.Click += new System.EventHandler(this.ModifyInventory_Click);
+            // 
+            // ModifyDesc
+            // 
+            this.ModifyDesc.Location = new System.Drawing.Point(562, 849);
+            this.ModifyDesc.Name = "ModifyDesc";
+            this.ModifyDesc.Size = new System.Drawing.Size(133, 46);
+            this.ModifyDesc.TabIndex = 48;
+            this.ModifyDesc.Text = "Modify Description";
+            this.ModifyDesc.UseVisualStyleBackColor = true;
+            this.ModifyDesc.Click += new System.EventHandler(this.ModifyDesc_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(787, 849);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(136, 46);
+            this.button1.TabIndex = 49;
+            this.button1.Text = "Modify Name";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // TableDropDown
+            // 
+            this.TableDropDown.FormattingEnabled = true;
+            this.TableDropDown.Items.AddRange(new object[] {
+            "Snack",
+            "Drink",
+            "Item"});
+            this.TableDropDown.Location = new System.Drawing.Point(100, 861);
+            this.TableDropDown.Name = "TableDropDown";
+            this.TableDropDown.Size = new System.Drawing.Size(178, 24);
+            this.TableDropDown.TabIndex = 50;
+            // 
+            // NameTextBox
+            // 
+            this.NameTextBox.Location = new System.Drawing.Point(129, 821);
+            this.NameTextBox.Name = "NameTextBox";
+            this.NameTextBox.Size = new System.Drawing.Size(100, 22);
+            this.NameTextBox.TabIndex = 51;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(126, 787);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(120, 16);
+            this.label5.TabIndex = 52;
+            this.label5.Text = "Enter Name of Item";
+            // 
+            // InventoryInput
+            // 
+            this.InventoryInput.Location = new System.Drawing.Point(367, 821);
+            this.InventoryInput.Name = "InventoryInput";
+            this.InventoryInput.Size = new System.Drawing.Size(100, 22);
+            this.InventoryInput.TabIndex = 53;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(312, 787);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(215, 16);
+            this.label11.TabIndex = 54;
+            this.label11.Text = "Number to add to existing Inventory";
+            // 
+            // DescriptionInput
+            // 
+            this.DescriptionInput.Location = new System.Drawing.Point(547, 821);
+            this.DescriptionInput.Name = "DescriptionInput";
+            this.DescriptionInput.Size = new System.Drawing.Size(161, 22);
+            this.DescriptionInput.TabIndex = 55;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(577, 787);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(105, 16);
+            this.label12.TabIndex = 56;
+            this.label12.Text = "New Description";
+            // 
+            // NameInput
+            // 
+            this.NameInput.Location = new System.Drawing.Point(807, 821);
+            this.NameInput.Name = "NameInput";
+            this.NameInput.Size = new System.Drawing.Size(100, 22);
+            this.NameInput.TabIndex = 57;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(819, 787);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(74, 16);
+            this.label13.TabIndex = 58;
+            this.label13.Text = "New Name";
+            // 
+            // InventoryTableChoice
+            // 
+            this.InventoryTableChoice.FormattingEnabled = true;
+            this.InventoryTableChoice.Items.AddRange(new object[] {
+            "snack",
+            "drink",
+            "item"});
+            this.InventoryTableChoice.Location = new System.Drawing.Point(112, 374);
+            this.InventoryTableChoice.Name = "InventoryTableChoice";
+            this.InventoryTableChoice.Size = new System.Drawing.Size(201, 24);
+            this.InventoryTableChoice.TabIndex = 59;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1924, 923);
+            this.Controls.Add(this.InventoryTableChoice);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.NameInput);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.DescriptionInput);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.InventoryInput);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.NameTextBox);
+            this.Controls.Add(this.TableDropDown);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.ModifyDesc);
+            this.Controls.Add(this.ModifyInventory);
+            this.Controls.Add(this.InventoryReport);
+            this.Controls.Add(this.AvailableItems);
+            this.Controls.Add(this.AvailableDrinks);
+            this.Controls.Add(this.AvailableSnacks);
             this.Controls.Add(this.isCaffinated);
             this.Controls.Add(this.DrinkAdd);
             this.Controls.Add(this.snackAdd);
@@ -540,6 +733,23 @@
         private System.Windows.Forms.Button snackAdd;
         private System.Windows.Forms.Button DrinkAdd;
         private System.Windows.Forms.TextBox isCaffinated;
+        private System.Windows.Forms.Button AvailableSnacks;
+        private System.Windows.Forms.Button AvailableDrinks;
+        private System.Windows.Forms.Button AvailableItems;
+        private System.Windows.Forms.Button InventoryReport;
+        private System.Windows.Forms.Button ModifyInventory;
+        private System.Windows.Forms.Button ModifyDesc;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ComboBox TableDropDown;
+        private System.Windows.Forms.TextBox NameTextBox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox InventoryInput;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox DescriptionInput;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox NameInput;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox InventoryTableChoice;
     }
 }
 
