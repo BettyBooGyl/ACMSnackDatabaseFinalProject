@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -278,6 +278,78 @@ namespace ACMSnackDatabase
                 }
                  conn.Close();
             for (int i = 0; i < items.Count; i++)
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void viewSnackButton_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(connection))
+            {
+                string query = "SELECT snack_name, price, description, inventory FROM snacks";
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
+
+                DataSet ds = new DataSet();
+                dAdapter.Fill(ds);
+                OutOfStockGridView.ReadOnly = true;
+                OutOfStockGridView.DataSource = ds.Tables[0];
+            }
+        }
+
+        private void viewDrinkButton_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(connection))
+            {
+                string query = "SELECT drink_name, price, description, inventory FROM drinks";
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
+
+                DataSet ds = new DataSet();
+                dAdapter.Fill(ds);
+                OutOfStockGridView.ReadOnly = true;
+                OutOfStockGridView.DataSource = ds.Tables[0];
+            }
+        }
+
+        private void viewItemButton_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(connection))
+            {
+                string query = "SELECT itemname, price, description, inventory FROM item";
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
+
+                DataSet ds = new DataSet();
+                dAdapter.Fill(ds);
+                OutOfStockGridView.ReadOnly = true;
+                OutOfStockGridView.DataSource = ds.Tables[0];
+            }
+        }
+
+        private void viewTransactions_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(connection))
+            {
+                string query = "SELECT * FROM transactions";
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
+
+                DataSet ds = new DataSet();
+                dAdapter.Fill(ds);
+                OutOfStockGridView.ReadOnly = true;
+                OutOfStockGridView.DataSource = ds.Tables[0];
+            }
+        }
+
+        private void DisplayUserButton_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(connection))
             {
                 listBoxOutOfStock.Items.Add(items[i].ToString());
             }
@@ -701,6 +773,93 @@ namespace ACMSnackDatabase
                 DialogResult result;
 
                 result = MessageBox.Show(message, caption, buttons);
+            }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void snackAdd_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(connection))
+            {
+                string name = snackName.Text.Trim();
+                Decimal price = Convert.ToDecimal(snackCost.Text);
+                SqlMoney snackPrice = price;
+                string descrip = snackDescription.Text.Trim();
+                string query = "INSERT INTO[dbo].[snacks] ([name], [price], [description]) VALUES(N'" + name + "', CAST(" + snackPrice + " AS Money), N'" + descrip + "')";
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
+            }
+        }
+
+        private void DrinkAdd_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(connection))
+            {
+                string name = drinkName.Text.Trim();
+                Decimal price = Convert.ToDecimal(drinkCost.Text);
+                SqlMoney drinkPrice = price;
+                string descrip = drinkDescription.Text.Trim();
+                string isCaf = isCaffinated.Text.Trim();
+                Boolean caffine = false;
+                isCaf = isCaf.ToLower();   
+                if (isCaf == "t")
+                {
+                    caffine = true;
+                }
+                string query = "INSERT INTO[dbo].[drinks] ([name], [price], [description], [is_caffinated]) VALUES(N'" + name + "', CAST(" + drinkPrice + " AS Money), N'" + descrip + "', N'" + caffine +"')";
+                SqlCommand cmd = new SqlCommand(query, conn);
+
+                SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
             }
         }
     }
