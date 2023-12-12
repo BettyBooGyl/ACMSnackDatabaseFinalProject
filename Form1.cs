@@ -210,7 +210,50 @@ namespace ACMSnackDatabase
                 throw new Exception(ex.Message, ex);
             }
         }
+        private void updateCustomers() {
+            // Get db connection
+            NpgsqlConnection conn = new NpgsqlConnection(connection);
 
+            // Open connection to db
+            conn.Open();
+
+            string query = "SELECT * FROM customer";
+            NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+            cmd.Prepare();
+
+            NpgsqlDataReader reader = cmd.ExecuteReader();
+
+            List<Customer> customers = new List<Customer>();
+
+            while (reader.Read())
+            {
+                Customer customer = new Customer((Convert.ToInt32(reader["userid"])),
+                    (Convert.ToString(reader["nickname"])),
+                    (Convert.ToDecimal(reader["debit"])));
+
+                customers.Add(customer);
+            }
+
+            int count = customers.Count;
+            for (int i = 0; i < count; i++)
+            {
+                int highest = int.MaxValue;
+                int highestIndex = int.MaxValue;
+                for (int j = 0; j < customers.Count; j++)
+                {
+                    if (customers[j].userid < highest)
+                    {
+                        highest = customers[j].userid;
+                        highestIndex = j;
+                    }
+                }
+                listBox2.Items.Add(customers[highestIndex].ToString());
+                customerList.Add(customers[highestIndex]); // fill the "global" list
+                customers.RemoveAt(highestIndex);
+
+                conn.Close();
+            }
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -288,16 +331,43 @@ namespace ACMSnackDatabase
         private void addButton_Click(object sender, EventArgs e)
         {
 
-            using (NpgsqlConnection conn = new NpgsqlConnection(connection))
-            {
-                string nickname = nicnameTextBox.Text.Trim();
-                Decimal debit = Convert.ToDecimal(debitBox1.Text);
-                SqlMoney debitMoney = debit;
-                string query = "INSERT INTO[dbo].[customer] ([nickname], [debit]) VALUES(N'" + nickname + "', CAST(" + debitMoney + " AS Money))";
-                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
 
-                //SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
+
+                // Get db connection to update inventory
+                NpgsqlConnection conn = new NpgsqlConnection(connection);
+
+                // Open connection to db
+                conn.Open();
+
+                // Make command for db
+                string query = "INSERT INTO customer (nickname, debit) VALUES (@nickname, @debitMoney)";
+
+                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                if (nicnameTextBox.Text.Trim().Length == 3) {
+                    cmd.Parameters.AddWithValue("@nickname", nicnameTextBox.Text.Trim());
+                    cmd.Parameters.AddWithValue("@debitMoney", Convert.ToDecimal(debitBox1.Text));
+                    cmd.Prepare();
+
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                    string message = "A new user has been added!";
+                    string caption = "User added";
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    DialogResult result;
+
+                result = MessageBox.Show(message, caption, buttons);
+                updateCustomers();
             }
+                else {
+                string message = "A nickname must be 3 characters long!";
+                string caption = "Invalid Nickname";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                DialogResult result;
+
+                result = MessageBox.Show(message, caption, buttons);
+            }
+        
+
 
         }
 
