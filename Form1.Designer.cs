@@ -968,30 +968,22 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ListBox listBoxOutOfStock;
         private System.Windows.Forms.Button listAvailableButton;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        
         private System.Windows.Forms.TextBox itemNameBox;
         private System.Windows.Forms.TextBox itemCostBox;
         private System.Windows.Forms.TextBox itemDescBox;
         private System.Windows.Forms.Label Inventory;
         private System.Windows.Forms.TextBox itemInvBox;
         private System.Windows.Forms.Button addItemButton;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
+       
         private System.Windows.Forms.TextBox snackIDBox;
         private System.Windows.Forms.TextBox allergenBox;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
+       
         private System.Windows.Forms.TextBox drinkIDBox;
         private System.Windows.Forms.TextBox caffineBox;
         private System.Windows.Forms.Button addSnack;
         private System.Windows.Forms.Button addDrink;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
+        
         private System.Windows.Forms.TextBox removeIDBox;
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.Button viewTransactionsButton;

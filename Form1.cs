@@ -773,7 +773,7 @@ namespace ACMSnackDatabase
 
             
 
-            string query = "SELECT item.itemID, item.itemname, item.price, item.description, item.inventory, drink.is_caffinated, snack.allergens FROM item LEFT JOIN snack on snack.itemid = item.itemid LEFT JOIN drink on drink.itemid = item.itemid;";
+            string query = "SELECT item.itemID, item.itemname, item.price, item.description, item.inventory, drink.is_caffinated, snack.allergens FROM item LEFT JOIN snack on snack.itemid = item.itemid LEFT JOIN drink on drink.itemid = item.itemid ORDER BY itemid;";
             NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
             cmd.Prepare();
 
@@ -793,22 +793,7 @@ namespace ACMSnackDatabase
                         (Convert.ToInt32(reader["inventory"])));
 
                 items.Add(item);
-                /*if (reader["allergens"].Equals(""))
-                {
-                    Drink drink = new Drink(
-                    (Convert.ToString(reader["itemname"])),
-                    (Convert.ToDecimal(reader["price"])),
-                    (Convert.ToString(reader["description"])), (Convert.ToBoolean(reader["is_caffinated"])));
-                    items.Add(drink);
-                }
-                else
-                {
-                    Snack snack = new Snack(
-                        (Convert.ToString(reader["itemname"])),
-                        (Convert.ToDecimal(reader["price"])),
-                        (Convert.ToString(reader["description"])), (Convert.ToString(reader["allergens"])));
-                    items.Add(snack);
-                }*/
+                
 
             }
             conn.Close();
@@ -872,7 +857,7 @@ namespace ACMSnackDatabase
             NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
             if (snackIDBox.Text.Trim().Length > 0)
             {
-                cmd.Parameters.AddWithValue("@itemID", snackIDBox.Text.Trim());
+                cmd.Parameters.AddWithValue("@itemID", Convert.ToInt32(snackIDBox.Text.Trim()));
                 cmd.Parameters.AddWithValue("@allergens", allergenBox.Text.Trim());
 
                 cmd.Prepare();
@@ -906,12 +891,12 @@ namespace ACMSnackDatabase
             conn.Open();
 
             // Make command for db
-            string query = "INSERT INTO drink (itemID, is_caffinated) VALUES (@itemID, @is_caffianted)";
+            string query = "INSERT INTO drink (itemID, is_caffinated) VALUES (@itemID, @is_caffinated)";
 
             NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
             if (drinkIDBox.Text.Trim().Length > 0 && caffineBox.Text.Trim().Length > 0)
             {
-                cmd.Parameters.AddWithValue("@itemID", snackIDBox.Text.Trim());
+                cmd.Parameters.AddWithValue("@itemID", Convert.ToInt32(drinkIDBox.Text.Trim()));
                 if (caffineBox.Text.Trim() == "t")
                 {
                     cmd.Parameters.AddWithValue("@is_caffinated", true);
@@ -952,7 +937,7 @@ namespace ACMSnackDatabase
             conn.Open();
 
             // Make command for db
-            string query = "DELETE FROM item WHERE itemID = @itemID";
+            string query = "DELETE FROM snack WHERE itemID = @itemID; DELETE FROM drink WHERE itemID = @itemID; DELETE FROM item WHERE itemID = @itemID;";
 
             NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
             if (removeIDBox.Text.Trim().Length > 0)
