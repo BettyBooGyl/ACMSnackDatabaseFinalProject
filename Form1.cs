@@ -29,6 +29,7 @@ namespace ACMSnackDatabase
             this.description = description;
             this.inventory = inventory;
         }
+
         public int itemid;
         public string itemname;
         public decimal price;
@@ -36,6 +37,45 @@ namespace ACMSnackDatabase
         public int inventory;
 
         public override string ToString() => $"{itemid}, {itemname}, {price}, {description}, {inventory}";
+    }
+    public interface Items
+    {
+    }
+    public struct Drink:Items
+    {
+        public string itemname;
+        public decimal price;
+        public string description;
+        public bool is_caffinated;
+        public Drink(string itemname, decimal price, string description, bool is_caffinated)
+        {
+            this.itemname = itemname;
+            this.price = price;
+            this.description = description;
+            this.is_caffinated = is_caffinated;
+
+        }
+        public override string ToString() { 
+            if (is_caffinated) return $"{itemname}, {price}, {description}," + " is cafinated";
+            else return $"{itemname}, {price}, {description}," + " is not cafinated";
+        } 
+    }
+
+    public struct Snack:Items
+    {
+        public string itemname;
+        public decimal price;
+        public string description;
+        public string allergens;
+        public Snack(string itemname, decimal price, string description, string allergens)
+        {
+            this.itemname = itemname;
+            this.price = price;
+            this.description = description;
+            this.allergens = allergens;
+
+        }
+        public override string ToString() => $"{itemname}, {price}, {description}, {allergens}";
     }
     public struct Customer
     {
@@ -170,7 +210,51 @@ namespace ACMSnackDatabase
                 throw new Exception(ex.Message, ex);
             }
         }
+        private void updateCustomers() {
+            // Get db connection
+            NpgsqlConnection conn = new NpgsqlConnection(connection);
 
+            // Open connection to db
+            conn.Open();
+
+            string query = "SELECT * FROM customer";
+            NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+            cmd.Prepare();
+
+            NpgsqlDataReader reader = cmd.ExecuteReader();
+
+            List<Customer> customers = new List<Customer>();
+
+            while (reader.Read())
+            {
+                Customer customer = new Customer((Convert.ToInt32(reader["userid"])),
+                    (Convert.ToString(reader["nickname"])),
+                    (Convert.ToDecimal(reader["debit"])));
+
+                customers.Add(customer);
+            }
+            // Clears the list box so that customers are not doubled
+            listBox2.Items.Clear();
+            int count = customers.Count;
+            for (int i = 0; i < count; i++)
+            {
+                int highest = int.MaxValue;
+                int highestIndex = int.MaxValue;
+                for (int j = 0; j < customers.Count; j++)
+                {
+                    if (customers[j].userid < highest)
+                    {
+                        highest = customers[j].userid;
+                        highestIndex = j;
+                    }
+                }
+                listBox2.Items.Add(customers[highestIndex].ToString());
+                customerList.Add(customers[highestIndex]); // fill the "global" list
+                customers.RemoveAt(highestIndex);
+
+                conn.Close();
+            }
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -192,12 +276,17 @@ namespace ACMSnackDatabase
 
         private void button1_Click(object sender, EventArgs e)
         {
-            using (SqlConnection conn = new SqlConnection(connection))
-            {
-                string query = "CREATE TABLE IF NOT EXISTS snacks (itemID serial PRIMARY KEY, snack_name VARCHAR(20) not NULL, price decimal not NULL, description VARCHAR(50), inventory int default 0);";
+                // Get db connection
+                NpgsqlConnection conn = new NpgsqlConnection(connection);
 
-                //string query = "SELECT item.itemname, item.price, item.description, drink.is_caffinated, snack.allergens FROM item LEFT JOIN snack on snack.itemid = item.itemid LEFT JOIN drink on drink.itemid = item.itemid WHERE inventory = 0;";
-                SqlCommand cmd = new SqlCommand(query, conn);
+                // Open connection to db
+                conn.Open();
+
+                //string query = "CREATE TABLE IF NOT EXISTS snacks (itemID serial PRIMARY KEY, snack_name VARCHAR(20) not NULL, price decimal not NULL, description VARCHAR(50), inventory int default 0);";
+
+                string query = "SELECT item.itemname, item.price, item.description, drink.is_caffinated, snack.allergens FROM item LEFT JOIN snack on snack.itemid = item.itemid LEFT JOIN drink on drink.itemid = item.itemid WHERE inventory = 0;";
+                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                cmd.Prepare();
 
                 /*SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
 
@@ -205,44 +294,81 @@ namespace ACMSnackDatabase
                 dAdapter.Fill(ds);
                 OutOfStockGridView.ReadOnly = true;
                 OutOfStockGridView.DataSource = ds.Tables[0]; */
-            }
+                // Get data out of command and get object
+                NpgsqlDataReader reader = cmd.ExecuteReader();
 
-        }
+                // initialization
+                List<Items> items = new List<Items>(); // this will be a memory leak. there is nothing you can do about it. cope and seeth.
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-        }
-
-        private void DisplayUserButton_Click(object sender, EventArgs e)
-        {
-            using (SqlConnection conn = new SqlConnection(connection))
+                // while reader has things to read: make a new item, throw it in the list;
+                while (reader.Read())
+                {
+                    if (reader["allergens"].Equals("")){
+                        Drink drink = new Drink(
+                        (Convert.ToString(reader["itemname"])),
+                        (Convert.ToDecimal(reader["price"])),
+                        (Convert.ToString(reader["description"])), (Convert.ToBoolean(reader["is_caffinated"])));
+                    items.Add(drink);
+                }
+                else
+                {
+                    Snack snack = new Snack(
+                        (Convert.ToString(reader["itemname"])),
+                        (Convert.ToDecimal(reader["price"])),
+                        (Convert.ToString(reader["description"])), (Convert.ToString(reader["allergens"])));
+                    items.Add(snack);
+                }
+                    
+                }
+                 conn.Close();
+            for (int i = 0; i < items.Count; i++)
             {
-                string query = "SELECT nickname, debit FROM customer";
-                SqlCommand cmd = new SqlCommand(query, conn);
-
-                SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
-
-                DataSet ds = new DataSet();
-                dAdapter.Fill(ds);
-                UsersGridView.ReadOnly = true;
-                UsersGridView.DataSource = ds.Tables[0];
+                listBoxOutOfStock.Items.Add(items[i].ToString());
             }
 
-        }
+
+            }
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            using (SqlConnection conn = new SqlConnection(connection))
-            {
-                string nickname = nicnameTextBox.Text.Trim();
-                Decimal debit = Convert.ToDecimal(debitBox1.Text);
-                SqlMoney debitMoney = debit;
-                string query = "INSERT INTO[dbo].[customer] ([nickname], [debit]) VALUES(N'" + nickname + "', CAST(" + debitMoney + " AS Money))";
-                SqlCommand cmd = new SqlCommand(query, conn);
 
-                SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
+
+
+                // Get db connection to update inventory
+                NpgsqlConnection conn = new NpgsqlConnection(connection);
+
+                // Open connection to db
+                conn.Open();
+
+                // Make command for db
+                string query = "INSERT INTO customer (nickname, debit) VALUES (@nickname, @debitMoney)";
+
+                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                if (nicnameTextBox.Text.Trim().Length == 3) {
+                    cmd.Parameters.AddWithValue("@nickname", nicnameTextBox.Text.Trim());
+                    cmd.Parameters.AddWithValue("@debitMoney", Convert.ToDecimal(debitBox1.Text));
+                    cmd.Prepare();
+
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                    string message = "A new user has been added!";
+                    string caption = "User added";
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    DialogResult result;
+
+                result = MessageBox.Show(message, caption, buttons);
+                updateCustomers();
             }
+                else {
+                string message = "A nickname must be 3 characters long!";
+                string caption = "Invalid Nickname";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                DialogResult result;
+
+                result = MessageBox.Show(message, caption, buttons);
+            }
+        
+
 
         }
 
@@ -584,50 +710,8 @@ namespace ACMSnackDatabase
                     cmd.ExecuteNonQuery();
                     conn.Close();
 
-
-                    listBox2.Items.Clear();
-
-                    conn.Open();
-
-                    query = "SELECT * FROM customer";
-                    cmd = new NpgsqlCommand(query, conn);
-                    cmd.Prepare();
-
-                    NpgsqlDataReader reader = cmd.ExecuteReader();
-
-                    List<Customer> customers = new List<Customer>();
-
-                    while (reader.Read())
-                    {
-                        Customer customer = new Customer((Convert.ToInt32(reader["userid"])),
-                            (Convert.ToString(reader["nickname"])),
-                            (Convert.ToDecimal(reader["debit"])));
-
-                        customers.Add(customer);
-                    }
-
-                    int count = customers.Count;
-
-                    customerList.Clear(); //clear the global list, prep it for recreation
-
-                    for (int i = 0; i < count; i++)
-                    {
-                        int highest = int.MaxValue;
-                        int highestIndex = int.MaxValue;
-                        for (int j = 0; j < customers.Count; j++)
-                        {
-                            if (customers[j].userid < highest)
-                            {
-                                highest = customers[j].userid;
-                                highestIndex = j;
-                            }
-                        }
-                        listBox2.Items.Add(customers[highestIndex].ToString());
-                        customerList.Add(customers[highestIndex]); // fill the "global" list
-                        customers.RemoveAt(highestIndex);
-                    }
-
-                    conn.Close();
+                    // Calls update customers method that repopulates the listbox with new information
+                    updateCustomers();
 
                     // -- THANK YOU POP UP --
 
